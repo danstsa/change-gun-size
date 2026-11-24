@@ -1,0 +1,3763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#121212" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="三角洲改枪台" />
+  <meta name="application-name" content="三角洲改枪台" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ff9500'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='36' fill='white' font-family='sans-serif'%3E%CE%94%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ff9500'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='36' fill='white' font-family='sans-serif'%3E%CE%94%3C/text%3E%3C/svg%3E" />
+  <link rel="manifest" id="manifestLink" href="" />
+  <script>
+    document.documentElement.classList.toggle("is-android", /Android/i.test(navigator.userAgent || ""));
+  </script>
+  <title>三角洲改枪台</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --bg-2: #181818;
+      --panel: #1e1e1e;
+      --panel-2: #242424;
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #e8e8e8;
+      --muted: #888888;
+      --brand: #ff9500;
+      --brand-2: #ffaa33;
+      --gold: #ff9500;
+      --green: #34c759;
+      --red: #ff453a;
+      --blue: #ff9500;
+      --shadow: none;
+      --shadow-hover: 0 0 0 1px rgba(255, 149, 0, 0.28);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --fast: 160ms;
+      --med: 280ms;
+      --slow: 420ms;
+      --ar: #ff9500;
+      --smg: #64d2ff;
+      --dmr: #ffd60a;
+      --lmg: #30d158;
+      --sg: #bf5af2;
+      --sr: #ff6482;
+      --pistol: #ac8e68;
+      --other: #8e8e93;
+      --vvh: 100vh;
+      --kb: 0px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+      --mono: "SF Mono", ui-monospace, Menlo, monospace;
+      --focus: rgba(255, 149, 0, 0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; max-width: 100%; }
+    html, body, main { overflow-anchor: none; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      color-scheme: dark;
+    }
+    body {
+      font-family: var(--font);
+      font-variant-numeric: tabular-nums lining-nums;
+      -webkit-tap-highlight-color: rgba(255, 149, 0, 0.18);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 60% 36% at 0% -6%, rgba(255, 149, 0, 0.08), transparent 55%),
+        radial-gradient(ellipse 46% 30% at 100% 0%, rgba(255, 255, 255, 0.03), transparent 50%),
+        linear-gradient(180deg, #161616 0%, #121212 42%, #101010 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      overflow: hidden;
+      overflow-x: hidden;
+      overscroll-behavior: none;
+    }
+    body::before,
+    body::after { content: none; }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      height: 100%;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      padding: 14px 22px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(18, 18, 18, 0.86);
+      backdrop-filter: saturate(140%) blur(18px);
+      -webkit-backdrop-filter: saturate(140%) blur(18px);
+      box-shadow: none;
+    }
+    .head-top,
+    .head-tools {
+      display: flex;
+      align-items: center;
+      gap: 12px 16px;
+      min-width: 0;
+    }
+    .head-tools { align-items: stretch; }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+    .logo {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      background: rgba(255, 149, 0, 0.14);
+      border-radius: 12px;
+      color: var(--brand);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+    .brand h1 {
+      font-size: 24px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      font-weight: 600;
+    }
+    .brand p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+      letter-spacing: 0;
+    }
+
+    .search {
+      flex: 0.8;
+      position: relative;
+      min-width: 180px;
+    }
+    .search input {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px 0 38px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      outline: none;
+      font-size: 13px;
+      border-radius: 12px;
+    }
+    .search input:focus { border-color: var(--brand); box-shadow: 0 0 0 4px var(--focus); }
+    .search input::placeholder { color: var(--muted); }
+    .search::before {
+      content: "⌕";
+      position: absolute;
+      left: 12px;
+      top: 9px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .quick-add {
+      flex: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 240px;
+    }
+    .quick-add textarea {
+      height: 44px;
+      min-height: 44px;
+      max-height: 44px;
+      overflow-y: auto;
+      resize: none;
+      padding: 10px 12px;
+      font-size: 13px;
+      border-radius: 12px;
+    }
+    .quick-add textarea:focus { height: 44px; min-height: 44px; max-height: 44px; }
+    .quick-add button { height: 44px; min-width: 72px; white-space: nowrap; flex-shrink: 0; }
+
+    .actions { display: flex; gap: 8px; margin-left: auto; flex-shrink: 0; }
+    .stats { display: flex; gap: 8px; flex-wrap: wrap; }
+    button, .btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      height: 38px;
+      padding: 0 14px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 980px;
+      transition:
+        background var(--med) var(--ease),
+        border-color var(--med) var(--ease),
+        color var(--med) var(--ease),
+        box-shadow var(--med) var(--ease),
+        transform var(--med) var(--ease);
+    }
+    button, .btn, input, textarea {
+      touch-action: manipulation;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    select { touch-action: manipulation; border-radius: 12px; }
+    input, textarea { border-radius: 12px; }
+    button:hover, .btn:hover { background: var(--panel-2); border-color: rgba(255, 255, 255, 0.16); color: var(--text); }
+    button:active { transform: scale(0.98); }
+    .btn-primary {
+      background: var(--brand);
+      border-color: transparent;
+      color: #111;
+      font-weight: 600;
+      letter-spacing: 0;
+      box-shadow: none;
+    }
+    .btn-primary:hover { background: var(--brand-2); color: #111; border-color: transparent; }
+    .btn-ghost { background: var(--panel); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 228px 1fr;
+      min-height: 0;
+    }
+
+    aside {
+      border-right: 1px solid var(--line);
+      padding: 16px 12px;
+      overflow: auto;
+      background: rgba(18, 18, 18, 0.72);
+    }
+    .aside-label {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      padding: 0 10px 10px;
+    }
+    #cats { display: flex; flex-direction: column; }
+    .cat {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 42px;
+      padding: 0 10px 0 12px;
+      margin-bottom: 6px;
+      background: transparent;
+      text-align: left;
+      color: var(--muted);
+      position: relative;
+      transition:
+        background var(--med) var(--ease),
+        border-color var(--med) var(--ease),
+        color var(--med) var(--ease),
+        box-shadow var(--med) var(--ease),
+        transform var(--med) var(--ease);
+    }
+    .cat::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      margin-right: 8px;
+      background: currentColor;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+    .cat b { font-weight: 500; flex: 1; }
+    .cat.active {
+      background: var(--brand);
+      border-color: transparent;
+      color: #111;
+      box-shadow: none;
+    }
+    .cat.active::before { background: #111; opacity: 0.7; }
+    .cat.active .count {
+      background: rgba(0, 0, 0, 0.18);
+      color: #111;
+    }
+    .count {
+      min-width: 24px;
+      height: 20px;
+      padding: 0 6px;
+      background: var(--panel-2);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      border-radius: 980px;
+      text-align: center;
+    }
+
+    main {
+      min-height: 0;
+      overflow: auto;
+      padding: 18px 22px 80px;
+    }
+    main::-webkit-scrollbar, aside::-webkit-scrollbar { width: 10px; }
+    main::-webkit-scrollbar-thumb, aside::-webkit-scrollbar-thumb {
+      background: #3a3a3a;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .view-switch { display: flex; gap: 6px; flex-shrink: 0; }
+    .view-switch button { height: 32px; padding: 0 12px; background: var(--panel); }
+    .view-switch button.active {
+      background: var(--brand);
+      border-color: transparent;
+      color: #111;
+    }
+    .view-switch button.active:hover { background: var(--brand-2); color: #111; }
+    .hint { color: var(--muted); font-size: 13px; }
+    .pill {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 980px;
+      padding: 3px 10px;
+    }
+
+    .gun-block {
+      margin-bottom: 30px;
+      animation: riseIn 360ms var(--ease) both;
+    }
+    .gun-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 8px 0 10px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(18, 18, 18, 0.92));
+    }
+    .gun-head h2 {
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+    .tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: #111;
+      border: 1px solid transparent;
+      border-radius: 980px;
+      background: var(--brand);
+      padding: 3px 8px;
+    }
+    .gun-head .tag-btn {
+      height: 28px;
+      padding: 0 10px;
+      font-size: 12px;
+      background: var(--panel);
+    }
+    .gun-head .btn-fav {
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      margin-right: 0;
+    }
+    #confirmTypeWrap { margin-top: 12px; }
+    #confirmType { height: 44px; font-size: 16px; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 14px 14px 12px 16px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      animation: fadeIn 280ms var(--ease) both;
+      transition:
+        background var(--med) var(--ease),
+        border-color var(--med) var(--ease),
+        color var(--med) var(--ease),
+        box-shadow var(--med) var(--ease),
+        transform var(--med) var(--ease);
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 3px;
+      background: var(--accent, var(--brand));
+    }
+    .card:hover {
+      border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    .card:active { transform: translateY(0); }
+    .card.is-new {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 2px rgba(255, 149, 0, 0.35), var(--shadow-hover);
+      animation: cardMark 1.8s var(--ease) 1;
+    }
+    @keyframes cardMark {
+      0% { box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.55), var(--shadow-hover); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 149, 0, 0), var(--shadow); }
+    }
+    .more { position: relative; }
+    .more-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      z-index: 20;
+      min-width: 168px;
+      padding: 6px;
+      border-radius: 12px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+    .more-menu button {
+      display: block;
+      width: 100%;
+      height: 40px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      text-align: left;
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+    }
+    .more-menu button:hover { background: var(--panel-2); }
+    .notice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .notice[hidden] { display: none; }
+    .notice.warn { color: #ffb340; }
+    .notice button {
+      margin-left: auto;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      font: inherit;
+      cursor: pointer;
+    }
+    .notice .notice-x {
+      margin-left: 0;
+      width: 32px;
+      padding: 0;
+    }
+    .price-switch, .view-switch { display: flex; flex-wrap: wrap; gap: 6px; }
+    .price-switch button, #clearFilters {
+      height: 32px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .price-switch button.active { color: #111; border-color: transparent; background: var(--brand); }
+    .unknown-hint { margin: 0 0 8px; color: var(--muted); font-size: 12px; }
+    .compare-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .compare-card {
+      flex: 0 0 min(240px, 78vw);
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+    }
+    .compare-card p { margin: 0 0 8px; word-break: break-all; }
+    .compare-pick { display: flex; flex-direction: column; gap: 8px; }
+    .compare-pick label { display: flex; gap: 8px; align-items: flex-start; }
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      min-width: 0;
+    }
+    .note-title {
+      flex: 1;
+      min-width: 0;
+      height: auto;
+      min-height: 28px;
+      margin: 0;
+      padding: 2px 4px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.35;
+      text-align: left;
+      white-space: normal;
+    }
+    .note-title.empty { color: var(--muted); font-weight: 600; }
+    .note-title:hover { background: transparent; border-color: var(--line); color: var(--text); transform: none; }
+    .note-title.editing { display: none; }
+    .price {
+      margin-left: auto;
+      flex-shrink: 0;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--brand);
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 149, 0, 0.22);
+      border-radius: 980px;
+      background: rgba(255, 149, 0, 0.1);
+    }
+    .price small {
+      font-size: 12px;
+      margin-left: 1px;
+      color: var(--brand);
+      font-weight: 700;
+      opacity: 0.85;
+    }
+    .price.empty {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      border-color: var(--line);
+      background: transparent;
+    }
+    button.price { cursor: text; }
+    button.price:hover { border-color: rgba(255, 149, 0, 0.45); background: rgba(255, 149, 0, 0.16); color: var(--brand); transform: none; }
+    button.price:active { transform: none; }
+    .price.editing { display: none; }
+    .price-input {
+      display: none;
+      margin-left: auto;
+      width: 92px;
+      height: 32px;
+      padding: 0 10px;
+      border: 1px solid var(--brand);
+      border-radius: 980px;
+      background: var(--panel-2);
+      color: var(--text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: right;
+      outline: none;
+    }
+    .price-input.editing { display: block; }
+    .note-input {
+      display: none;
+      flex: 1;
+      min-width: 0;
+      height: 34px;
+      padding: 0 10px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+    }
+    .note-input.editing { display: block; }
+    .note-input:focus { border-color: var(--brand); }
+    .note-input::placeholder { color: #666; font-weight: 400; }
+    .code-line {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 36px;
+      padding: 0 72px 0 10px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      color: #b0b0b0;
+      font-family: var(--mono);
+      letter-spacing: -0.01em;
+      border-radius: 10px;
+      font-size: 12px;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+    .code-line:hover { border-color: var(--brand); color: var(--brand); }
+    .code-line.copied {
+      color: var(--green);
+      border-color: var(--green);
+      background: rgba(52, 199, 89, 0.12);
+    }
+    .code-line.copied::after {
+      content: "已复制";
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--green);
+    }
+    .card-ops { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+    .card-ops button { height: 36px; padding: 0 12px; font-size: 12px; }
+    .btn-fav {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      margin-right: auto;
+      padding: 0;
+      border-color: transparent;
+      background: transparent;
+      color: #666;
+      flex-shrink: 0;
+      transition: color 180ms var(--ease), background-color 180ms var(--ease);
+    }
+    .card-ops .btn-fav { width: 40px; min-width: 40px; height: 40px; padding: 0; }
+    .btn-fav svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .btn-fav svg path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      transition: fill 180ms var(--ease), stroke 180ms var(--ease);
+    }
+    .btn-fav.on { color: var(--brand); }
+    .btn-fav.on svg {
+      filter: drop-shadow(0 1px 2px rgba(255, 149, 0, 0.35));
+    }
+    .btn-fav.on svg path { fill: currentColor; stroke: currentColor; stroke-width: 0.8; }
+    .btn-fav:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: transparent;
+      color: #aaa;
+      transform: none;
+    }
+    .btn-fav.on:hover {
+      background: rgba(255, 149, 0, 0.14);
+      border-color: transparent;
+      color: var(--brand-2);
+      transform: none;
+    }
+    .btn-fav:active,
+    .btn-fav.on:active { transform: none; }
+    .btn-del { color: var(--red); border-color: rgba(255, 69, 58, 0.35); background: var(--panel); }
+    .btn-del:hover { color: var(--red); background: rgba(255, 69, 58, 0.12); border-color: rgba(255, 69, 58, 0.5); }
+    .btn-danger {
+      background: rgba(255, 69, 58, 0.14);
+      border-color: rgba(255, 69, 58, 0.4);
+      color: var(--red);
+      font-weight: 600;
+    }
+    .btn-danger:hover { color: #ff6961; border-color: rgba(255, 69, 58, 0.55); filter: none; }
+
+    .board-empty {
+      margin: 90px auto 0;
+      max-width: 420px;
+      text-align: center;
+      color: var(--muted);
+      padding: 36px 20px;
+      border: 1px dashed var(--line);
+    }
+    .board-empty h3 { color: var(--text); margin-bottom: 8px; font-size: 20px; }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity var(--med) var(--ease), visibility var(--med);
+    }
+    #confirmOverlay { z-index: 40; }
+    .overlay.show { opacity: 1; visibility: visible; pointer-events: auto; }
+    .modal {
+      width: min(860px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
+      padding: 22px;
+      border-radius: 20px;
+      transform: translateY(10px);
+      transition: transform var(--med) var(--ease);
+    }
+    .overlay.show .modal { transform: translateY(0); }
+    .modal h3 { margin-bottom: 6px; letter-spacing: -0.02em; font-weight: 600; }
+    .modal .sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    textarea, select, .field {
+      width: 100%;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 10px 12px;
+      font: inherit;
+      outline: none;
+    }
+    textarea { min-height: 42px; resize: vertical; font-family: var(--mono); font-size: 13px; }
+    #editCode { min-height: 120px; }
+    textarea:focus, select:focus, .field:focus { border-color: var(--brand); box-shadow: 0 0 0 4px var(--focus); }
+    textarea::placeholder, .field::placeholder { color: #666; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    label { display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .modal-ops { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      right: auto;
+      bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(29, 29, 31, 0.88);
+      border: 0;
+      color: #f5f5f7;
+      padding: 10px 12px 10px 16px;
+      z-index: 30;
+      border-radius: 980px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(10px);
+      transition: opacity var(--med) var(--ease), transform var(--med) var(--ease), visibility var(--med);
+    }
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast button {
+      height: 30px;
+      padding: 0 12px;
+      border: 0;
+      background: transparent;
+      color: var(--brand);
+      font-weight: 600;
+    }
+    .toast button:hover { color: var(--brand-2); border-color: transparent; }
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (hover: none) {
+      button:hover, .btn:hover { transform: none; }
+      .card:hover { transform: none; box-shadow: var(--shadow); }
+    }
+
+    @media (max-width: 980px) {
+      .cards { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    }
+
+    @media (max-width: 1100px) {
+      html, body {
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: visible;
+        overscroll-behavior-y: auto;
+      }
+      .app {
+        display: block;
+        height: auto;
+        min-height: 100%;
+        width: 100%;
+        max-width: 100%;
+      }
+      header {
+        gap: 8px;
+        padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 10px;
+      }
+      .head-top { flex-wrap: wrap; }
+      .head-tools { flex-direction: column; align-items: stretch; }
+      .search input,
+      .quick-add textarea {
+        border-radius: 12px;
+      }
+      .brand {
+        min-width: 0;
+        flex: 1;
+      }
+      .brand h1 { font-size: 18px; letter-spacing: -0.02em; }
+      .brand p { display: none; }
+      .logo { width: 36px; height: 36px; font-size: 16px; }
+      .search,
+      .quick-add {
+        flex: none;
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+      }
+      .brand { order: 1; }
+      .actions { order: 2; }
+      .stats { order: 3; width: 100%; }
+      .search input,
+      .quick-add textarea,
+      .note-input,
+      .field,
+      select,
+      textarea {
+        font-size: 16px;
+      }
+      .quick-add textarea { height: 48px; min-height: 48px; max-height: 48px; }
+      .quick-add textarea:focus { height: 48px; min-height: 48px; max-height: 48px; }
+      .quick-add button { min-width: 64px; height: 48px; }
+      .actions {
+        width: auto;
+        margin-left: auto;
+      }
+      .actions button { flex: none; height: 36px; padding: 0 12px; }
+      .layout { display: block; }
+      aside {
+        position: sticky;
+        top: 0;
+        z-index: 11;
+        display: block;
+        overflow: visible;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 8px 0;
+        background: #121212;
+        backdrop-filter: none;
+      }
+      .aside-label { display: none; }
+      #cats {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: auto;
+        gap: 6px;
+        padding: 0 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        overscroll-behavior-x: contain;
+      }
+      #cats::-webkit-scrollbar { display: none; }
+      .cat {
+        width: auto;
+        margin: 0;
+        height: 38px;
+        white-space: nowrap;
+        padding: 0 10px;
+      }
+      .cat.active {
+        background: var(--brand);
+        color: #111;
+        box-shadow: none;
+      }
+      main {
+        overflow: visible;
+        padding: 12px 12px calc(28px + env(safe-area-inset-bottom, 0px) + var(--kb));
+      }
+      .toolbar {
+        margin-bottom: 10px;
+      }
+      .gun-head {
+        position: static;
+        padding-top: 4px;
+      }
+      .gun-head h2 { font-size: 18px; }
+      .gun-head .tag-btn { height: 36px; padding: 0 12px; }
+      .gun-head .btn-fav { width: 44px; min-width: 44px; height: 44px; }
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .card {
+        border-radius: 16px;
+      }
+      .card:hover { transform: none; }
+      .price { font-size: 16px; }
+      .price-input { height: 36px; font-size: 16px; }
+      .note-title { min-height: 40px; font-size: 16px; }
+      .note-input { height: 44px; }
+      .code-line { height: 44px; font-size: 13px; }
+      .code-line.copied::after { top: 12px; }
+      .card-ops button { height: 40px; min-width: 72px; }
+      .card-ops .btn-fav { width: 44px; min-width: 44px; height: 44px; padding: 0; }
+      .overlay {
+        padding: 0;
+        align-items: flex-end;
+        height: var(--vvh, 100%);
+      }
+      .modal {
+        width: 100%;
+        max-height: 92%;
+        max-height: calc(var(--vvh) * 0.92);
+        padding: 18px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+        border-radius: 20px 20px 0 0;
+        transform: translateY(28px);
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+      }
+      .overlay.show .modal { transform: translateY(0); }
+      .form-grid { grid-template-columns: 1fr; }
+      .modal-ops { flex-wrap: wrap; }
+      .modal-ops button { flex: 1; min-height: 42px; }
+      .toast {
+        left: 50%;
+        right: auto;
+        width: max-content;
+        max-width: calc(100% - 24px);
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px) + var(--kb));
+      }
+      #confirmOverlay {
+        align-items: center;
+        padding: 16px;
+        height: auto;
+      }
+      #confirmOverlay .modal {
+        width: min(420px, 100%);
+        max-height: none;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+      }
+    }
+
+    html.is-android body {
+      background-attachment: scroll;
+    }
+    html.is-android body::before { display: none; }
+    @media (max-width: 1100px) {
+      body { background-attachment: scroll; }
+    }
+    html.is-android header,
+    html.is-android aside,
+    html.is-android .toast,
+    html.is-android .overlay {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gun-block,
+      .card,
+      .toast,
+      .modal,
+      .overlay { animation: none !important; }
+      .card,
+      .card:hover,
+      .card:active,
+      .card.is-new,
+      button,
+      button:active,
+      .cat { transform: none !important; }
+      .toast,
+      .toast.show { transform: translateX(-50%); }
+      .modal,
+      .overlay.show .modal { transform: none; }
+    }
+    html.is-android .cat.active {
+      background: var(--brand);
+      color: #111;
+      box-shadow: none;
+    }
+
+    @media (max-width: 420px) {
+      .hint { font-size: 12px; }
+      .code-line { font-size: 12px; }
+    }
+
+    @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
+      html {
+        height: auto !important;
+        overflow: visible !important;
+      }
+      body {
+        height: auto !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        overscroll-behavior: auto !important;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+      }
+      .app,
+      .layout,
+      main {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+      #cats {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x pan-y;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="head-top">
+        <div class="brand">
+          <div class="logo">Δ</div>
+          <div>
+            <h1>三角洲改枪台</h1>
+            <p>烽火地带改枪码台 · 自动分类归档</p>
+          </div>
+        </div>
+        <div class="stats" id="stats"></div>
+        <div class="actions">
+          <button class="btn-ghost" id="importBtn" title="支持 JSON 备份和 txt 清单，只添加还没有的方案">合并导入</button>
+          <button class="btn-ghost" id="exportBtn">导出</button>
+          <input id="importFile" type="file" accept="application/json,.json,text/plain,.txt" hidden />
+          <div class="more">
+            <button class="btn-ghost" id="moreBtn" type="button" aria-expanded="false" aria-haspopup="true">更多</button>
+            <div class="more-menu" id="moreMenu" hidden>
+              <button type="button" id="copyAllBtn">复制全部数据</button>
+              <button type="button" id="restoreBtn">用备份恢复</button>
+              <button type="button" id="shareViewBtn">分享当前结果</button>
+              <button type="button" id="retypeBtn">归类</button>
+              <button type="button" id="clearBtn">清空</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="notice" id="backupBar" hidden>
+        <span>已超过 14 天没有完整备份。导出或复制一份，换设备也能找回。</span>
+        <button type="button" id="backupNow">立即导出</button>
+        <button type="button" class="notice-x" id="backupDismiss" aria-label="14 天后再提醒">×</button>
+      </div>
+      <div class="notice warn" id="unsavedBar" hidden>
+        <span>还没保存到本机。可以先导出，刷新前会再提醒一次。</span>
+        <button type="button" id="unsavedExport">立即导出</button>
+      </div>
+      <div class="notice warn" id="staleBar" hidden>
+        <span>另一个标签页改过数据。请刷新后再改，以免覆盖那边的修改。</span>
+        <button type="button" id="staleReload">刷新</button>
+      </div>
+      <div class="notice warn" id="updateBar" hidden>
+        <span>页面有新版本。刷新后才会用到新版，不会停在旧缓存。</span>
+        <button type="button" id="updateReload">刷新</button>
+      </div>
+      <div class="head-tools">
+        <div class="search">
+          <input id="q" type="search" inputmode="search" enterkeyhint="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="搜索枪名 / 改枪码 / 价格 / 备注" />
+        </div>
+        <div class="quick-add">
+          <textarea id="quickAdd" rows="1" inputmode="text" enterkeyhint="go" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="粘贴改枪码、枪名+方案名清单、DG1 分享码或备份 JSON，按回车生成"></textarea>
+          <button class="btn-primary" id="quickAddBtn">生成</button>
+        </div>
+      </div>
+    </header>
+    <div class="layout">
+      <aside>
+        <div class="aside-label">WEAPON CLASS</div>
+        <div id="cats"></div>
+      </aside>
+      <main>
+        <div class="toolbar">
+          <div class="view-switch" id="viewSwitch">
+            <button type="button" data-view="all">全部</button>
+            <button type="button" data-view="fav">收藏</button>
+          </div>
+          <div class="price-switch" id="priceSwitch">
+            <button type="button" data-price="all">不限价格</button>
+            <button type="button" data-price="none">未标价</button>
+            <button type="button" data-price="low">30万以下</button>
+            <button type="button" data-price="mid">30–60万</button>
+            <button type="button" data-price="high">60万以上</button>
+          </div>
+          <button type="button" id="clearFilters" hidden>清除筛选</button>
+          <div class="hint" id="status">粘贴改枪码后按回车生成，重复的不会添加</div>
+        </div>
+        <div id="board"></div>
+      </main>
+    </div>
+  </div>
+
+  <div class="overlay" id="editOverlay">
+    <div class="modal" style="width:min(520px,100%)">
+      <h3>编辑方案</h3>
+      <p class="sub">每条改枪码都可以单独改枪名、分类、价格和备注。</p>
+      <div class="form-grid">
+        <div>
+          <label>枪械名称</label>
+          <input class="field" id="editName" autocomplete="off" autocapitalize="off" spellcheck="false" />
+        </div>
+        <div>
+          <label>枪械种类</label>
+          <select id="editType"></select>
+        </div>
+        <div>
+          <label>价格</label>
+          <input class="field" id="editPrice" inputmode="decimal" placeholder="例如 30w，可留空" />
+        </div>
+        <div>
+          <label>备注</label>
+          <input class="field" id="editNote" placeholder="可选" />
+        </div>
+      </div>
+      <label>改枪码</label>
+      <textarea id="editCode" style="min-height:120px"></textarea>
+      <div class="modal-ops">
+        <button id="deleteEdit" class="btn-del" style="margin-right:auto">删除</button>
+        <button id="cancelEdit">取消</button>
+        <button class="btn-primary" id="saveEdit">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="confirmOverlay">
+    <div class="modal" style="width:min(420px,100%)">
+      <h3 id="confirmTitle">确认</h3>
+      <p class="sub" id="confirmText"></p>
+      <label id="confirmTypeWrap" hidden>枪械种类
+        <select id="confirmType"></select>
+      </label>
+      <div class="modal-ops">
+        <button id="confirmCancel" type="button">取消</button>
+        <button id="confirmAlt" type="button" hidden>合并</button>
+        <button id="confirmOk" type="button">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="compareOverlay">
+    <div class="modal" style="width:min(860px,100%)">
+      <h3 id="compareTitle">对比</h3>
+      <p class="sub" id="compareNote"></p>
+      <div id="compareBody"></div>
+      <div class="modal-ops">
+        <button id="compareClose" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status">
+    <span id="toastText"></span>
+    <button type="button" id="undoBtn" hidden>撤回</button>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "delta-gun-codes-v1";
+    const SEED_KEY = "delta-seed-catalog-v1";
+    const SEED_VERSION = 2;
+    const SEED_VERSION_KEY = "delta-seed-catalog-version";
+    const TYPE_OVERRIDE_KEY = "delta-gun-type-overrides-v1";
+    const GUN_FAV_KEY = "delta-gun-favorites-v1";
+    const BACKUP_AT_KEY = "delta-last-backup-at-v1";
+    const BACKUP_SNOOZE_KEY = "delta-backup-snooze-until-v1";
+    const BACKUP_VERSION = 1;
+    const APP_BUILD = "20261121a";
+    const SHARE_PREFIX = "DG1:";
+    const SHARE_LIMIT = 3500;
+    const FORTNIGHT = 14 * 86400000;
+
+    const SEED_TEXT = `M14
+50发50操速大弹鼓 · 94万 M14射手步枪-烽火地带-6I0G36C09FOHN3PL5Q602
+轻语消音30发 · 83万 M14射手步枪-烽火地带-6I0G3GS09FOHN3PL5Q602
+半改30发 · 53万 M14射手步枪-烽火地带-6I0G3KS09FOHN3PL5Q602
+火控14 · 85万 M14射手步枪-烽火地带-6I0G3V009FOHN3PL5Q602
+M14标准答案 · 86万 M14射手步枪-烽火地带-6I0G3B409FOHN3PL5Q602
+MCX LT
+丐版猎手 · 22万 MCX LT突击步枪-烽火地带-6IUJCD406N3JUGK4SSBSR
+半改焰魂 · 30万 MCX LT突击步枪-烽火地带-6JBCJIG05F7T434AE5R57
+满改焰魂 · 49万 MCX LT突击步枪-烽火地带-6JAC5EK05F7T434AE5R57
+半改腰射 · 33万 6IUL85K0E91HEBEJES9I1
+满改增伤 · 55万 MCX LT突击步枪-烽火地带-6JAC6HC05F7T434AE5R57
+AR57
+满改 · 50万 AR57突击步枪-烽火地带-6JO8J4S0D00A1KDLFFTF0
+满改满腰射 · 50万 AR57突击步枪-烽火地带-6JO8J9O0D00A1KDLFFTF0
+丐版 · 29万 AR57突击步枪-烽火地带-6JO8JGS0D00A1KDLFFTF0
+性价比红点 · 42万 AR57突击步枪-烽火地带-6JO8JOS0D00A1KDLFFTF0
+高倍压枪 · 53万 AR57突击步枪-烽火地带-6JO8K000D00A1KDLFFTF0
+K416
+半改性价比 · 35万 K416突击步枪-烽火地带-6JTCBRO03EINQ63AGU05N
+火控满改 · 68万 K416突击步枪-烽火地带-6IDGAOO00EGDSSRGB661R
+腰射开镜满改 · 55万 K416突击步枪-烽火地带-6I7JUAG0CGBCDU7HD94I4
+K437
+丐版 · 19万 K437突击步枪-烽火地带-6KC0LE007HF836C113JQN
+半改性价比 · 35万 K437突击步枪-烽火地带-6I0FDVK09FOHN3PL5Q602
+45发大满改 · 58万 K437突击步枪-烽火地带-6HIF8CS094898G9NDDGRT
+火控满改 · 68万 K437突击步枪-烽火地带-6H6FFL00930ONDDM5IKSM
+M7*
+新版2倍远点 · 110万 M7战斗步枪-烽火地带-6K0MIDS0FMORJPEU47985
+新版45发大满改 · 90W M7战斗步枪-烽火地带-6IDC810054MGAOBD2KDJV
+性价比红点 · 51万 6I6G7B00CGBCDU7HD94I4
+满改超稳24倍镜 · 77万 M7战斗步枪-烽火地带-6I0FEIO09FOHN3PL5Q602
+半改30发 · 43万 M7战斗步枪-烽火地带-6IUJOG806N3JUGK4SSBSR
+顶级满改 · 120万 M7战斗步枪-烽火地带-6IH055C0DIV9IE8HPDKRP
+MK47（步枪）
+100满腰射 · 88万 MK47突击步枪-烽火地带-6I57FBO080ELE0AQVMCG8
+大满改激光枪 · 90万 MK47突击步枪-烽火地带-6HLB8DC0CQ9J5LUV083F9
+高倍压枪 · 63万 MK47突击步枪-烽火地带-6I0FALG09FOHN3PL5Q602
+满改性价比 · 45万 MK47突击步枪-烽火地带-6I0FB1O09FOHN3PL5Q602
+高机动满改 · 75万 MK47突击步枪-烽火地带-6JA7R4803EINQ63AGU05N
+KC17（步枪）
+满改30发 · 52万 KC17突击步枪-烽火地带-6I0FC1409FOHN3PL5Q602
+高倍压枪 · 49万 KC17突击步枪-烽火地带-6I0FC9S09FOHN3PL5Q602
+性价比 · 38万 KC17突击步枪-烽火地带-6I0FCKG09FOHN3PL5Q602
+丐版 · 26万 KC17突击步枪-烽火地带-6I0FCSS09FOHN3PL5Q602
+移速流女鬼 · 29万 KC17突击步枪-烽火地带-6IT494806DTE68BB2NHQU
+As-val（步枪）
+半改30发 · 35万 AS Val突击步枪-烽火地带-6H3BKUS0DKPR1AESPN8DT
+刺三倍 · 56万 AS Val突击步枪-烽火地带-6J331P003EINQ63AGU05N
+满改45发 · 72万 AS Val突击步枪-烽火地带-6KGS2K8012N3QGAE8SONN
+移速流女鬼 · 48万 AS Val突击步枪-烽火地带-6IT49O006DTE68BB2NHQU
+半改 · 35万 AS Val突击步枪-烽火地带-6I57PBK080ELE0AQVMCG8
+腾龙*（步枪）
+大满改 · 57万 腾龙突击步枪-烽火地带-6KFV4Q80CRU8QKH0SC0K3
+小满改 · 38万 腾龙突击步枪-烽火地带-6KFV4LO0CRU8QKH0SC0K3
+丐版 · 22万 腾龙突击步枪-烽火地带-6H9BOGK0FMORJPEU47985
+满改二倍 · 42万 腾龙突击步枪-烽火地带-6H6VFEG0FMORJPEU47985
+半改 · 35万 腾龙突击步枪-烽火地带-6IUJSJ806N3JUGK4SSBSR
+SCAR-H（步枪）
+性价比 · 38万 SCAR-H战斗步枪-烽火地带-6H34RL80FMORJPEU47985
+50发激光枪 · 51万 SCAR-H战斗步枪-烽火地带-6I0FIDO09FOHN3PL5Q602
+红点超稳 · 34万 SCAR-H战斗步枪-烽火地带-6I0FI2O09FOHN3PL5Q602
+满改高倍 · 50万 SCAR-H战斗步枪-烽火地带-6I0FIJK09FOHN3PL5Q602
+AUG*（步枪）
+最常见3倍稳 · 23万 AUG突击步枪-烽火地带-6H34T3C0FMORJPEU47985
+三倍流超稳 · 43万 AUG突击步枪-烽火地带-6GPE86S0CQ9J5LUV083F9
+大满改超稳！ · 55万 AUG突击步枪-烽火地带-6GPE86S0CQ9J5LUV083F9
+丐版稳定 · 26万 AUG突击步枪-烽火地带-6H99RC80FMORJPEU47985
+AKM（步枪）
+红点满改 · 38万 AKM突击步枪-烽火地带-6G94BCG0FHI6PKF6C3P0U
+腰射急停 · 29万 AKM突击步枪-烽火地带-6J3474K05DOOFIGSCJ9JG
+性价比 · 20万 AKM突击步枪-烽火地带-6GPE8TC0CQ9J5LUV083F9
+满改 · 47万 AKM突击步枪-烽火地带-6I0FMAS09FOHN3PL5Q602
+M4A1*（步枪）
+红点满改 · 40万 M4A1突击步枪-烽火地带-6H34V7K0FMORJPEU47985
+纯绿丐版 · 19万 M4A1突击步枪-烽火地带-6IB151K0FMORJPEU47985
+腰射急停 · 32万 M4A1突击步枪-烽火地带-6IMJL0O04E93FJHAQGRLM
+M250*
+37大满改 · 54万 M250通用机枪-烽火地带-6H35A4K0FMORJPEU47985
+三倍镜 · 58万 M250通用机枪-烽火地带-6I0FOHC09FOHN3PL5Q602
+性价比 · 27万 M250通用机枪-烽火地带-6GJ9F94094898G9NDDGRT
+满改 · 60万 M250通用机枪-烽火地带-6I0FO9S09FOHN3PL5Q602
+消音满改 · 60万 M250通用机枪-烽火地带-6I0FONS09FOHN3PL5Q602
+SR-3M
+移速流女鬼 · 38万 SR-3M紧凑突击步枪-烽火地带-6IH1FN80EPKITGBDS8KHM
+丐版 · 20万 SR-3M紧凑突击步枪-烽火地带-6GPE9IC0CQ9J5LUV083F9
+半改 · 40万 SR-3M紧凑突击步枪-烽火地带-6IUJUBC06N3JUGK4SSBSR
+45发腰射大满改 · 75万 SR-3M紧凑突击步枪-烽火地带-6I586LO080ELE0AQVMCG8
+MP7*
+腰射开镜满改 · 50万 MP7冲锋枪-烽火地带-6GVQC540DKPR1AESPN8DT
+腰射均衡 · 29万 MP7冲锋枪-烽火地带-6GVQC4C0DKPR1AESPN8DT
+豪华满腰射 · 70万 MP7冲锋枪-烽火地带-6I588E4080ELE0AQVMCG8
+女鬼静步流 · 48万 MP7冲锋枪-烽火地带-6IAAMP8073BD2R3NDI4S3
+MK4
+丐版3连发 · 15万 MK4冲锋枪-烽火地带-6I57DH8080ELE0AQVMCG8
+丐版连发 · 20万 MK4冲锋枪-烽火地带-6I57DKK080ELE0AQVMCG8
+半改性价比 · 35万 MK4冲锋枪-烽火地带-6I57DNS080ELE0AQVMCG8
+满改满腰射 · 65万 MK4冲锋枪-烽火地带-6I57D1K080ELE0AQVMCG8
+三连发满腰射 · 65万 MK4冲锋枪-烽火地带-6I57DC4080ELE0AQVMCG8
+P90*
+大满改 · 43万 P90冲锋枪-烽火地带-6GVQCFO0DKPR1AESPN8DT
+腰射 · 28万 P90冲锋枪-烽火地带-6GVQCI80DKPR1AESPN8DT
+性价比 · 27万 P90冲锋枪-烽火地带-6GVQCEG0DKPR1AESPN8DT
+QJB201
+满改红点 · 49万 QJB201轻机枪-烽火地带-6I0FPEO09FOHN3PL5Q602
+100后坐力高倍 · 52万 QJB201轻机枪-烽火地带-6HIEP7K094898G9NDDGRT
+性价比 · 22万 QJB201轻机枪-烽火地带-6I0FQ3409FOHN3PL5Q602
+SMG45*
+满改腰射开镜 · 27万 SMG-45冲锋枪-烽火地带-6I4CG180FMORJPEU47985
+女鬼 · 11万 SMG-45冲锋枪-烽火地带-6J0G82O00H5VC4TT6R7C5
+MP5*
+满腰射配肉蛋 · 10万 MP5冲锋枪-烽火地带-6H35ESG0FMORJPEU47985
+Vector
+大满改 · 51万 Vector冲锋枪-烽火地带-6G93UVG08OPOB8QKQ72I8
+腰射 · 25万 Vector冲锋枪-烽火地带-6G93V0408OPOB8QKQ72I8
+性价比 · 18万 Vector冲锋枪-烽火地带-6I0FR0C09FOHN3PL5Q602
+QCQ171
+满改激光枪 · 50万 QCQ171冲锋枪-烽火地带-6GPEA9C0CQ9J5LUV083F9
+修脚夺舍 · 11万 QCQ171冲锋枪-烽火地带-6GPEA8K0CQ9J5LUV083F9
+半改30发 · 30万 QCQ171冲锋枪-烽火地带-6I0FRRO09FOHN3PL5Q602
+腰射大弹匣 · 26万 QCQ171冲锋枪-烽火地带-6I0FS4009FOHN3PL5Q602
+S12K
+腰射基础 · 13万 S12K霰弹枪-烽火地带-6IIKP8805TMT450G8BKGR
+满改烈日灼心专属 · 56万 6I86KI80CGBCDU7HD94I4
+M1014
+鹿蛋侧瞄修脚 · 20万 M1014霰弹枪-烽火地带-6I0FT2G09FOHN3PL5Q602
+M870
+狙 · 21万 M870霰弹枪-烽火地带-6I0FTM809FOHN3PL5Q602
+丐 · 11万 M870霰弹枪-烽火地带-6I0FTGG09FOHN3PL5Q602
+sr-25
+堵桥神器 · 70万 SR-25射手步枪-烽火地带-6I0FUBC09FOHN3PL5Q602
+高机动满改 · 61万 SR-25射手步枪-烽火地带-6I0FUG809FOHN3PL5Q602
+PSG-1*
+性价比 · 40万 PSG-1射手步枪-烽火地带-6I0FURG09FOHN3PL5Q602
+堵桥架点 · 52万 PSG-1射手步枪-烽火地带-6HD31OC094898G9NDDGRT
+SVD
+性价比架点 · 34万 SVD狙击步枪-烽火地带-6IHMU28094898G9NDDGRT
+复合弓
+常规 · 20万 复合弓-烽火地带-6GPEAS80CQ9J5LUV083F9
+速射 · 25万 复合弓-烽火地带-6KI7IEO0B93O97BHSQSCH
+腰射 · 18万 复合弓-烽火地带-6GPEAT40CQ9J5LUV083F9
+Marlin杠杆步枪
+常规点射 · 22万 Marlin杠杆步枪-烽火地带-6I0FV6009FOHN3PL5Q602
+满腰射 · 14万 Marlin杠杆步枪-烽火地带-6I0FVBG09FOHN3PL5Q602
+G18
+夺舍 · 9万 G18-烽火地带-6H35H8G0FMORJPEU47985
+93R
+跑刀清人机 · 4万 93R-烽火地带-6H35HFS0FMORJPEU47985
+.357左轮
+装配件 · 2万 .357左轮-烽火地带-6H35I380FMORJPEU47985
+M700
+瞬狙 · 45万 M700狙击步枪-烽火地带-6GPEAGC0CQ9J5LUV083F9
+凑战备正常用 · 25万 M700狙击步枪-烽火地带-6G940OO08OPOB8QKQ72I8
+SV-98
+满改37 · 25万 SV-98狙击步枪-烽火地带-6I0G26G09FOHN3PL5Q602
+凑战备无枪管 · 16万 SV-98狙击步枪-烽火地带-6I0G2JC09FOHN3PL5Q602
+R93
+消音37 · 22万 R93狙击步枪-烽火地带-6I0G2TS09FOHN3PL5Q602
+沙漠之鹰
+颗秒5头2枪 · 12万 沙漠之鹰-烽火地带-6I6O458073BD2R3NDI4S3
+PTR-32
+丐版 · 11万 6HLHINO0D1L2O4MSCGCF0
+性价比 · 27万 6HLHIOS0D1L2O4MSCGCF0
+轻语满改 · 43万 6HLHIQ00D1L2O4MSCGCF0
+火控满改 · 43万 6HLHIS80D1L2O4MSCGCF0
+FS-12
+腰射 · 13万 FS-12霰弹枪-烽火地带-6IUK5SG06N3JUGK4SSBSR
+金枪客提交）
+— · RM277突击步枪-烽火地带-6KFE0D806IVRBE95TNRSA —
+— · SVCH精确射手步枪-烽火地带-6KFE31C06IVRBE95TNRSA —
+— · ASh-12战斗步枪-烽火地带-6KFEK4G06IVRBE95TNRSA —
+PKM*
+满改高操控 · 42万 PKM通用机枪-烽火地带-6H3NBVG07UGKIJQBFO29O
+长枪管性价比 · 33万 PKM通用机枪-烽火地带-6HRPMPK0FMORJPEU47985
+丐版 · 23万 PKM通用机枪-烽火地带-6G94D100FHI6PKF6C3P0U
+2倍超好用 · 47万 PKM通用机枪-烽火地带-6HLIA3O04NJUL21ROVQKK
+`;
+
+    const TYPES = [
+      { id: "all", name: "全部" },
+      { id: "ar", name: "突击步枪" },
+      { id: "smg", name: "冲锋枪" },
+      { id: "dmr", name: "射手步枪" },
+      { id: "lmg", name: "轻机枪" },
+      { id: "sg", name: "霰弹枪" },
+      { id: "sr", name: "狙击步枪" },
+      { id: "pistol", name: "手枪" },
+      { id: "other", name: "特殊" }
+    ];
+
+    const CATEGORY_SUFFIX = [
+      ["精确射手步枪", "dmr"],
+      ["紧凑突击步枪", "ar"],
+      ["通用机枪", "lmg"],
+      ["突击步枪", "ar"],
+      ["战斗步枪", "ar"],
+      ["射手步枪", "dmr"],
+      ["狙击步枪", "sr"],
+      ["冲锋枪", "smg"],
+      ["轻机枪", "lmg"],
+      ["霰弹枪", "sg"],
+      ["杠杆式步枪", "dmr"],
+      ["杠杆步枪", "dmr"]
+    ];
+
+    const WEAPONS = [
+      { type: "ar", name: "K416", aliases: ["k416", "hk416", "hk 416"] },
+      { type: "ar", name: "M4A1", aliases: ["m4a1"] },
+      { type: "ar", name: "CAR-15", aliases: ["car-15", "car15", "car 15"] },
+      { type: "ar", name: "AKM", aliases: ["akm"] },
+      { type: "ar", name: "AK-12", aliases: ["ak-12", "ak12", "ak 12"] },
+      { type: "ar", name: "AK-74", aliases: ["ak-74", "ak74", "ak 74"] },
+      { type: "ar", name: "QBZ95-1", aliases: ["qbz95-1", "qbz-95", "qbz95", "95式", "95-1"] },
+      { type: "ar", name: "QBZ191", aliases: ["qbz191", "qbz-191"] },
+      { type: "ar", name: "SG552", aliases: ["sg552", "sg 552"] },
+      { type: "ar", name: "SCAR-H", aliases: ["scar-h", "scarh", "scar h"] },
+      { type: "ar", name: "SCAR-L", aliases: ["scar-l", "scarl", "scar l"] },
+      { type: "ar", name: "ASh-12", aliases: ["ash-12", "ash12", "ash 12"] },
+      { type: "ar", name: "M7", aliases: ["m7"] },
+      { type: "ar", name: "PTR-32", aliases: ["ptr-32", "ptr32", "ptr 32"] },
+      { type: "ar", name: "CI-19", aliases: ["ci-19", "ci19", "ci 19"] },
+      { type: "ar", name: "AUG", aliases: ["aug", "steyr aug"] },
+      { type: "ar", name: "K437", aliases: ["k437", "k-437"] },
+      { type: "ar", name: "MK47", aliases: ["mk47", "mk-47", "mutant"] },
+      { type: "ar", name: "MCX LT", aliases: ["mcx lt", "mcx-lt", "mcxlt", "焰魂", "焰魂MCX"] },
+      { type: "ar", name: "AR57", aliases: ["ar57", "ar-57"] },
+      { type: "ar", name: "KC17", aliases: ["kc17", "kc-17"] },
+      { type: "ar", name: "腾龙", aliases: ["腾龙", "高岛腾龙"] },
+      { type: "ar", name: "RM277", aliases: ["rm277", "rm-277"] },
+      { type: "ar", name: "G3", aliases: ["g3"] },
+      { type: "ar", name: "AS Val", aliases: ["as val", "as-val", "asval", "巨浪"] },
+      { type: "ar", name: "MDR", aliases: ["mdr"] },
+      { type: "smg", name: "Vector", aliases: ["vector", "维克托"] },
+      { type: "smg", name: "MP5", aliases: ["mp5"] },
+      { type: "smg", name: "MP7", aliases: ["mp7"] },
+      { type: "smg", name: "P90", aliases: ["p90"] },
+      { type: "smg", name: "SMG-45", aliases: ["smg-45", "smg45", "smg 45"] },
+      { type: "smg", name: "SR-3M", aliases: ["sr-3m", "sr3m", "sr 3m"] },
+      { type: "smg", name: "UZI", aliases: ["uzi", "乌兹"] },
+      { type: "smg", name: "QCQ171", aliases: ["qcq171", "qcq-171"] },
+      { type: "smg", name: "79式", aliases: ["79式", "type 79"] },
+      { type: "smg", name: "MPX", aliases: ["mpx"] },
+      { type: "smg", name: "PP-19", aliases: ["pp-19", "pp19", "bizon", "野牛"] },
+      { type: "smg", name: "MK4", aliases: ["mk4", "mk-4"] },
+      { type: "smg", name: "汤姆逊", aliases: ["汤姆逊", "thompson", "汤普森"] },
+      { type: "dmr", name: "Mini-14", aliases: ["mini-14", "mini14", "mini 14"] },
+      { type: "dmr", name: "SKS", aliases: ["sks"] },
+      { type: "dmr", name: "M14", aliases: ["m14"] },
+      { type: "dmr", name: "SR-25", aliases: ["sr-25", "sr25"] },
+      { type: "dmr", name: "SVD", aliases: ["svd", "拖拽"] },
+      { type: "dmr", name: "PSG-1", aliases: ["psg-1", "psg1", "tsg", "TSG"] },
+      { type: "dmr", name: "M110", aliases: ["m110"] },
+      { type: "dmr", name: "VSS", aliases: ["vss"] },
+      { type: "dmr", name: "SVCH", aliases: ["svch"] },
+      { type: "lmg", name: "M249", aliases: ["m249"] },
+      { type: "lmg", name: "PKM", aliases: ["pkm"] },
+      { type: "lmg", name: "QJB201", aliases: ["qjb201", "qjb-201"] },
+      { type: "lmg", name: "M250", aliases: ["m250"] },
+      { type: "lmg", name: "RPK", aliases: ["rpk", "rpk-16", "rpk16"] },
+      { type: "lmg", name: "MG4", aliases: ["mg4"] },
+      { type: "sg", name: "M870", aliases: ["m870"] },
+      { type: "sg", name: "S12K", aliases: ["s12k"] },
+      { type: "sg", name: "M1014", aliases: ["m1014"] },
+      { type: "sg", name: "FS-12", aliases: ["fs-12", "fs12"] },
+      { type: "sr", name: "AWM", aliases: ["awm"] },
+      { type: "sr", name: "M700", aliases: ["m700"] },
+      { type: "sr", name: "SV-98", aliases: ["sv-98", "sv98"] },
+      { type: "sr", name: "M200", aliases: ["m200", "intervention"] },
+      { type: "sr", name: "R93", aliases: ["r93"] },
+      { type: "pistol", name: "G18", aliases: ["g18", "glock", "g17"] },
+      { type: "pistol", name: "QSZ-92", aliases: ["qsz-92", "qsz92", "92式"] },
+      { type: "pistol", name: "沙漠之鹰", aliases: ["desert eagle", "deagle", "沙漠之鹰"] },
+      { type: "pistol", name: "M1911", aliases: ["m1911", "1911"] },
+      { type: "pistol", name: "93R", aliases: ["93r"] },
+      { type: "pistol", name: ".357左轮", aliases: [".357", "357", "左轮"] },
+      { type: "other", name: "复合弓", aliases: ["复合弓"] },
+      { type: "dmr", name: "Marlin", aliases: ["marlin", "marlin杠杆步枪", "杠杆式步枪", "杠杆步枪"] }
+    ].sort((a, b) => b.name.length - a.name.length);
+
+    const TYPE_NAME = Object.fromEntries(TYPES.map((t) => [t.id, t.name]));
+    const TYPE_COLOR = {
+      all: "#ff9500",
+      ar: "#ff9500",
+      smg: "#64d2ff",
+      dmr: "#ffd60a",
+      lmg: "#30d158",
+      sg: "#bf5af2",
+      sr: "#ff6482",
+      pistol: "#ac8e68",
+      other: "#8e8e93"
+    };
+
+    const state = {
+      items: load(),
+      category: "all",
+      query: "",
+      favOnly: false,
+      priceBand: "all",
+      editingId: null,
+      unsaved: false,
+      staleTab: false
+    };
+
+    function load() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]").map((item) => ({
+          ...item,
+          favorite: item.favorite === true
+        }));
+      } catch {
+        return [];
+      }
+    }
+
+    function save() {
+      if (state.staleTab) {
+        toast("其他标签页已改过数据，请先刷新，避免覆盖");
+        paintNotices();
+        return false;
+      }
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
+        state.unsaved = false;
+        paintNotices();
+        return true;
+      } catch {
+        state.unsaved = true;
+        paintNotices();
+        toast("还没保存到本机，请立即导出");
+        return false;
+      }
+    }
+
+    function uid() {
+      return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random());
+    }
+
+    let undoBatch = null;
+    let undoSnapshot = null;
+    let undoAddedIds = null;
+
+    function hideToast() {
+      const el = document.getElementById("toast");
+      el.classList.remove("show");
+      document.getElementById("undoBtn").hidden = true;
+    }
+
+    function toast(msg, undo) {
+      if (!undo) {
+        undoBatch = null;
+        undoSnapshot = null;
+        undoAddedIds = null;
+      }
+      const el = document.getElementById("toast");
+      document.getElementById("toastText").textContent = msg;
+      document.getElementById("undoBtn").hidden = !undo;
+      el.classList.add("show");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => {
+        hideToast();
+        if (undo) {
+          undoBatch = null;
+          undoSnapshot = null;
+          undoAddedIds = null;
+        }
+      }, undo ? 6000 : 2200);
+    }
+
+    function rememberRemoval(entries, message) {
+      undoBatch = entries;
+      toast(message, true);
+    }
+
+    function rememberSnapshot(snapshot, message) {
+      undoBatch = null;
+      undoSnapshot = snapshot;
+      toast(message, true);
+    }
+
+    function rememberAdded(ids, message) {
+      undoBatch = null;
+      undoSnapshot = null;
+      undoAddedIds = ids.filter(Boolean).slice();
+      toast(message, true);
+    }
+
+    function undoRemoval() {
+      if (undoAddedIds && undoAddedIds.length) {
+        const ids = new Set(undoAddedIds);
+        const count = undoAddedIds.length;
+        undoAddedIds = null;
+        clearTimeout(toast._t);
+        state.items = state.items.filter((item) => !ids.has(item.id));
+        if (state.editingId && ids.has(state.editingId)) closeEdit();
+        save();
+        hideToast();
+        render();
+        toast(`已撤回 ${count} 条新增`);
+        return;
+      }
+      if (undoSnapshot) {
+        const snap = undoSnapshot;
+        undoSnapshot = null;
+        undoBatch = null;
+        clearTimeout(toast._t);
+        state.items = snap.items;
+        writeGunFavs(snap.gunFavorites);
+        writeTypeOverrides(snap.typeOverrides);
+        save();
+        hideToast();
+        render();
+        return;
+      }
+      if (!undoBatch || !undoBatch.length) return;
+      const entries = undoBatch.slice().sort((a, b) => a.index - b.index);
+      undoBatch = null;
+      clearTimeout(toast._t);
+      entries.forEach(({ index, item }) => {
+        state.items.splice(Math.min(index, state.items.length), 0, item);
+      });
+      save();
+      hideToast();
+      const notes = revealItems(entries.map((entry) => entry.item.id));
+      if (notes.length) toast(notes.join("。"));
+    }
+
+    function removeByIds(ids, message) {
+      const idSet = new Set(ids);
+      const entries = [];
+      state.items.forEach((item, index) => {
+        if (idSet.has(item.id)) entries.push({ index, item: { ...item } });
+      });
+      if (!entries.length) return;
+      state.items = state.items.filter((item) => !idSet.has(item.id));
+      if (state.editingId && idSet.has(state.editingId)) closeEdit();
+      save();
+      render();
+      rememberRemoval(entries, message);
+    }
+
+    function priceValue(p) {
+      const m = String(p || "").match(/(\d+(?:\.\d+)?)/);
+      if (!m) return -1;
+      const n = Number(m[1]);
+      if (/k/i.test(p)) return n * 1000;
+      return n * 10000;
+    }
+
+    function displayPrice(p) {
+      if (!p) return { html: "未标价", empty: true };
+      const m = String(p).match(/^(\d+(?:\.\d+)?)([wWkK万千])?$/);
+      if (!m) return { html: escapeHtml(p), empty: false };
+      const unit = m[2] ? String(m[2]).toLowerCase() : "";
+      const label = unit === "w" || unit === "万" ? "万" : unit === "k" || unit === "千" ? "千" : "";
+      return { html: `${escapeHtml(m[1])}${label ? `<small>${label}</small>` : ""}`, empty: false };
+    }
+
+    function normalizePrice(raw) {
+      if (!raw) return "";
+      const text = String(raw).trim();
+      if (!text) return "";
+      const m = text.match(/(\d+(?:\.\d+)?)\s*([wWkK万千])?/);
+      if (!m) return text;
+      const n = m[1];
+      const u = (m[2] || "").toLowerCase();
+      if (u === "w" || u === "万") return n + "w";
+      if (u === "k" || u === "千") return n + "k";
+      if (Number(n) >= 10000) {
+        const w = Number(n) / 10000;
+        return (Number.isInteger(w) ? w : w.toFixed(1)) + "w";
+      }
+      return n + (u || "");
+    }
+
+    function extractPrice(text) {
+      const labeled = text.match(/(?:价格|造价|价|price|cost)\s*[:：]?\s*(\d+(?:\.\d+)?)\s*([wWkK万千])?/i);
+      if (labeled) return normalizePrice(labeled[1] + (labeled[2] || ""));
+      const unit = text.match(/(\d+(?:\.\d+)?)\s*([wW万])/);
+      if (unit) return normalizePrice(unit[0]);
+      return "";
+    }
+
+    function stripPrice(text) {
+      return text
+        .replace(/(?:价格|造价|价|price|cost)\s*[:：]?\s*\d+(?:\.\d+)?\s*[wWkK万千]?/gi, " ")
+        .replace(/\b\d+(?:\.\d+)?\s*[wW万]\b/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function escapeRe(s) {
+      return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    function hasToken(text, token) {
+      if (!token) return false;
+      if (/[\u4e00-\u9fa5]/.test(token)) return text.toLowerCase().includes(token.toLowerCase());
+      const re = new RegExp(`(^|[^a-z0-9])${escapeRe(token)}(?=$|[^a-z0-9])`, "i");
+      return re.test(text);
+    }
+
+    function findWeapon(text) {
+      const known = dictionaryWeapon(text);
+      if (known) return known;
+      const raw = String(text || "").replace(/[【】\[\]()（）]/g, " ").trim();
+      const title = raw.match(/^[\w\u4e00-\u9fa5\-_.]{2,20}$/);
+      if (title && !/提交/.test(title[0])) return { type: "other", name: title[0] };
+      return null;
+    }
+
+    function dictionaryWeapon(text) {
+      const raw = String(text || "").replace(/[【】\[\]()（）]/g, " ").trim();
+      if (!raw) return null;
+      let best = null;
+      let bestLen = 0;
+      for (const w of WEAPONS) {
+        const tokens = [w.name, ...w.aliases];
+        for (const token of tokens) {
+          if (token.length > bestLen && hasToken(raw, token)) {
+            best = w;
+            bestLen = token.length;
+          }
+        }
+      }
+      return best;
+    }
+
+    function isSeparator(line) {
+      const s = String(line || "").trim();
+      if (!s) return true;
+      return /^[-–—=_*~.]{1,}$/.test(s);
+    }
+
+    function looksLikeCode(line) {
+      const s = line.trim();
+      if (isSeparator(s)) return false;
+      if (s.length < 8) return false;
+      if (/(价格|造价|备注|压枪|适合|推荐)/.test(s) && s.length < 40) return false;
+      const compact = s.replace(/\s/g, "");
+      const alnum = compact.replace(/[-_+=\/]/g, "");
+      if (alnum.length < 6) return false;
+      return /^[A-Za-z0-9_\-+=\/]{8,}$/.test(compact);
+    }
+
+    function extractCodeToken(text) {
+      const s = String(text || "").replace(/`/g, "");
+      if (!s.trim()) return "";
+      const long = [...s.matchAll(/[A-Za-z0-9]{16,}/g)];
+      if (long.length) return long[long.length - 1][0];
+      const compact = s.trim().replace(/\s/g, "");
+      if (looksLikeCode(compact)) return compact.replace(/[-_+=\/]/g, "").length >= 8 ? compact : "";
+      const fallback = [...s.matchAll(/[A-Za-z0-9_\-+=\/]{8,}/g)]
+        .map((m) => m[0])
+        .filter((tok) => {
+          const alnum = tok.replace(/[-_+=\/]/g, "");
+          return alnum.length >= 8 && /[A-Za-z]/.test(alnum) && /\d/.test(alnum);
+        });
+      return fallback.length ? fallback[fallback.length - 1] : "";
+    }
+
+    function joinNoteParts(...parts) {
+      const out = [];
+      const seen = new Set();
+      parts.flatMap((p) => String(p || "").split(/\s*·\s*/)).forEach((part) => {
+        const t = String(part || "").trim();
+        if (!t || isSeparator(t) || seen.has(t)) return;
+        seen.add(t);
+        out.push(t);
+      });
+      return out.join(" · ");
+    }
+
+    function isCommentLine(line) {
+      return /^\s*#/.test(String(line || ""));
+    }
+
+    function isNoteOnlyLine(line) {
+      const s = String(line || "").trim();
+      if (!s) return false;
+      if (extractCodeToken(s)) return false;
+      if (/^(屏注|备注|说明)\s*[:：]/.test(s)) return true;
+      if (/^P\.?\s*S\.?\s*[:.：]/i.test(s)) return true;
+      if (/^P\.?\s*S\./i.test(s)) return true;
+      return false;
+    }
+
+    function normalizeHeader(line) {
+      return line.replace(/[*＊]/g, "").replace(/[（(][^）)]*[）)]/g, "").trim();
+    }
+
+    function resolveWeaponLabel(label) {
+      const text = String(label || "").replace(/[*＊]/g, "").trim();
+      if (!text) return null;
+      const known = dictionaryWeapon(text);
+      if (known) return { name: known.name, type: known.type };
+      const bare = normalizeHeader(text);
+      const split = splitWeaponAndType(bare || text);
+      if (split && split.name) {
+        const again = dictionaryWeapon(split.name) || dictionaryWeapon(bare);
+        if (again) return { name: again.name, type: again.type };
+        if (bare !== text || CATEGORY_SUFFIX.some(([cat]) => (bare || text).endsWith(cat))) {
+          return { name: split.name, type: split.type };
+        }
+      }
+      if (bare && /^[\w.\-\u4e00-\u9fa5 ]{2,24}$/.test(bare)) {
+        const w = dictionaryWeapon(bare) || findWeapon(bare);
+        if (w) return { name: w.name, type: w.type };
+      }
+      return null;
+    }
+
+    function parseGunHeader(line) {
+      const raw = String(line || "").trim();
+      if (!raw || isCommentLine(raw) || isSeparator(raw)) return null;
+      if (extractCodeToken(raw)) return null;
+      if (raw.includes("·") || /烽火地带/.test(raw) || /提交/.test(raw)) return null;
+      if (isNoteOnlyLine(raw)) return null;
+      if (/^(通用改枪码|改枪码|配件码|方案码|代码)\s*[:：]/i.test(raw)) return null;
+
+      let left = raw;
+      let tierNote = "";
+      const pipe = raw.match(/^(.+?)\s*[|｜]\s*(.+)$/);
+      if (pipe) {
+        left = pipe[1].trim();
+        tierNote = pipe[2].trim();
+      }
+
+      const starred = left.replace(/[*＊]/g, "").trim();
+      const bare = normalizeHeader(starred);
+      const hasSuffix = CATEGORY_SUFFIX.some(([cat]) => bare.endsWith(cat) || starred.replace(/[（(][^）)]*[）)]/g, "").trim().endsWith(cat));
+      const resolved = resolveWeaponLabel(starred);
+      if (!resolved) return null;
+
+      if (!pipe && !hasSuffix) {
+        const title = bare || starred;
+        if (!/^[\w.\-\u4e00-\u9fa5 ]{1,24}$/.test(title)) return null;
+        const tokens = [resolved.name, ...(WEAPONS.find((w) => w.name === resolved.name)?.aliases || [])];
+        const exact = tokens.some((tok) => title.toLowerCase() === String(tok).toLowerCase());
+        const near = title.length <= resolved.name.length + 4;
+        if (!exact && !near) return null;
+        if (/[，。！？；、]/.test(title) || /不如|直接|建议|可以|还是|不要/.test(title)) return null;
+      }
+
+      return { name: resolved.name, type: resolved.type, tierNote };
+    }
+
+    function parsePlanLine(line, current) {
+      const raw = String(line || "").trim();
+      if (!raw || isCommentLine(raw) || isSeparator(raw)) return null;
+
+      const share = parseShareLine(raw, current);
+      if (share) return share;
+
+      const labeled = raw.match(/^(?:通用改枪码|改枪码|配件码|方案码|代码)\s*[:：]\s*(.+)$/i);
+      let code = "";
+      let rest = raw;
+      if (labeled) {
+        code = extractCodeToken(labeled[1]) || labeled[1].replace(/`/g, "").trim();
+        rest = "";
+      } else {
+        code = extractCodeToken(raw);
+        if (!code) return null;
+        rest = raw.replace(/`/g, "");
+        const at = rest.lastIndexOf(code);
+        if (at >= 0) rest = (rest.slice(0, at) + rest.slice(at + code.length)).trim();
+        rest = rest.replace(/[:：\-–—]+\s*$/, "").trim();
+      }
+      if (!code || isSeparator(code)) return null;
+
+      const price = extractPrice(raw);
+      let planName = stripPrice(rest)
+        .replace(/^(?:通用改枪码|改枪码|配件码|方案码|代码)\s*[:：]?\s*/i, "")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (planName && (looksLikeCode(planName) || planName === code)) planName = "";
+
+      const fromLine = weaponFromLineLabel(planName);
+      let name = "";
+      let type = "";
+      let ownGun = false;
+      if (fromLine && fromLine.named) {
+        ownGun = true;
+        name = fromLine.name;
+        type = fromLine.type;
+        if (fromLine.zone) {
+          planName = "";
+        } else {
+          const tokens = [fromLine.name, ...(WEAPONS.find((w) => w.name === fromLine.name)?.aliases || [])];
+          let leftover = planName;
+          tokens.slice().sort((a, b) => b.length - a.length).forEach((tok) => {
+            leftover = leftover.replace(new RegExp(escapeRe(tok), "i"), " ");
+          });
+          leftover = leftover.replace(/[-–—|｜]/g, " ").replace(/烽火地带/g, " ").replace(/\s+/g, " ").trim();
+          planName = leftover.length > 1 ? leftover : "";
+        }
+      } else if (fromLine && fromLine.zone) {
+        ownGun = true;
+        name = "未识别";
+        type = fromLine.type || "other";
+        planName = "";
+      } else if (current && current.name) {
+        name = current.name;
+        type = current.type || "";
+      }
+      if (!name) name = "未识别";
+      if (!type) type = chooseType({ name, code, hint: "other" });
+      const tier = !ownGun && current ? current.tierNote : "";
+      const note = joinNoteParts(planName, tier);
+      return { name, type, code, price: price || "", note, ownGun };
+    }
+
+    function parseZoneLine(line) {
+      const raw = String(line || "").trim();
+      const m = raw.match(/^(.+?)-烽火地带-([A-Za-z0-9]{8,})\s*$/);
+      if (!m) return null;
+      const label = m[1].trim();
+      const code = m[2];
+      const known = dictionaryWeapon(label);
+      if (known) return { name: known.name, type: known.type, code, price: "", note: "", ownGun: true };
+      const split = splitWeaponAndType(label);
+      if (split && split.name) {
+        const again = dictionaryWeapon(split.name);
+        if (again) return { name: again.name, type: again.type, code, price: "", note: "", ownGun: true };
+        if (split.type && split.type !== "other") return { name: split.name, type: split.type, code, price: "", note: "", ownGun: true };
+      }
+      const cat = CATEGORY_SUFFIX.find(([word]) => label === word);
+      if (cat) return { name: "未识别", type: cat[1], code, price: "", note: "", ownGun: true };
+      return { name: "未识别", type: "other", code, price: "", note: "", ownGun: true };
+    }
+
+    function explicitGunLabel(text) {
+      const raw = String(text || "").trim();
+      if (!raw || raw.length > 80 || /不如|直接玩|建议|可以|还是|不要/.test(raw)) return null;
+      const zone = raw.match(/^(.+?)-烽火地带/);
+      const label = (zone ? zone[1] : raw).replace(/[·｜]/g, " ").trim();
+      if (!label) return null;
+      const known = dictionaryWeapon(label);
+      const hasSuffix = CATEGORY_SUFFIX.some(([cat]) => label === cat || label.endsWith(cat));
+      if (known && (zone || hasSuffix)) return { name: known.name, type: known.type };
+      if (known) {
+        const tokens = [known.name, ...(known.aliases || [])];
+        if (tokens.some((tok) => label.toLowerCase() === String(tok).toLowerCase())) return { name: known.name, type: known.type };
+      }
+      return null;
+    }
+
+    function stripGunLabelNote(note) {
+      const picked = explicitGunLabel(note);
+      if (!picked) return String(note || "").trim();
+      let text = String(note || "").replace(/-?\s*烽火地带\s*/g, " ");
+      const weapon = WEAPONS.find((w) => w.name === picked.name);
+      const tokens = [picked.name, ...((weapon && weapon.aliases) || [])].filter(Boolean).sort((a, b) => b.length - a.length);
+      tokens.forEach((tok) => {
+        if (tok.length < 2) return;
+        text = text.split(tok).join(" ");
+        text = text.split(String(tok).toLowerCase()).join(" ");
+      });
+      CATEGORY_SUFFIX.forEach(([cat]) => {
+        text = text.split(cat).join(" ");
+      });
+      return text.replace(/[·｜]/g, " ").replace(/\s+/g, " ").trim();
+    }
+
+    function reclassifyStored() {
+      let changed = 0;
+      state.items.forEach((item) => {
+        try {
+          const before = [item.name, item.type, item.note].join("\n");
+          const fromNote = explicitGunLabel(item.note);
+          const knownName = dictionaryWeapon(item.name);
+          const picked = fromNote || (knownName ? { name: knownName.name, type: knownName.type } : null);
+          if (picked && picked.name) {
+            item.name = picked.name;
+            item.type = overrideType(picked.name) || picked.type || item.type || "other";
+            if (fromNote) item.note = stripGunLabelNote(item.note);
+          }
+          if (before !== [item.name, item.type, item.note].join("\n")) changed += 1;
+        } catch (err) {}
+      });
+      if (changed) save();
+      return changed;
+    }
+
+    function stripZoneLabel(text) {
+      return String(text || "")
+        .replace(/[-–—\s]*烽火地带[-–—\s]*$/i, "")
+        .replace(/[-–—:：\s]+$/g, "")
+        .trim();
+    }
+
+    function weaponFromLineLabel(planName) {
+      const raw = String(planName || "").trim();
+      if (!raw) return null;
+      const zone = /烽火地带/.test(raw);
+      const label = stripZoneLabel(raw);
+      if (!label) return zone ? { name: "", type: "other", named: false, zone: true } : null;
+      const known = dictionaryWeapon(label);
+      if (known) return { name: known.name, type: known.type, named: true, zone };
+      const split = splitWeaponAndType(label);
+      if (split && split.name) {
+        const again = dictionaryWeapon(split.name);
+        if (again) return { name: again.name, type: again.type, named: true, zone };
+      }
+      const catOnly = CATEGORY_SUFFIX.find(([cat]) => label === cat);
+      if (catOnly) return { name: "", type: catOnly[1], named: false, zone: true };
+      if (zone && split && split.type && split.type !== "other") {
+        return { name: split.name || "", type: split.type, named: !!split.name, zone: true };
+      }
+      return null;
+    }
+
+    function inferTypeFromCode(code) {
+      const text = String(code || "").replace(/\s+/g, "").toLowerCase();
+      if (!text) return null;
+      const keywords = [
+        ["精确射手步枪", "dmr"],
+        ["精确射手", "dmr"],
+        ["紧凑突击步枪", "ar"],
+        ["突击步枪", "ar"],
+        ["战斗步枪", "ar"],
+        ["射手步枪", "dmr"],
+        ["狙击步枪", "sr"],
+        ["通用机枪", "lmg"],
+        ["轻机枪", "lmg"],
+        ["冲锋枪", "smg"],
+        ["霰弹枪", "sg"],
+        ["杠杆式步枪", "dmr"],
+        ["杠杆步枪", "dmr"],
+        ["手枪", "pistol"],
+        ["复合弓", "other"]
+      ];
+      for (const [word, type] of keywords) {
+        if (text.includes(word.toLowerCase())) return type;
+      }
+      return null;
+    }
+
+    function gunKey(name) {
+      return String(name || "").trim().toLowerCase();
+    }
+
+    function readTypeOverrides() {
+      try {
+        const data = JSON.parse(localStorage.getItem(TYPE_OVERRIDE_KEY) || "{}");
+        if (!data || typeof data !== "object" || Array.isArray(data)) return {};
+        return data;
+      } catch {
+        return {};
+      }
+    }
+
+    let typeOverrideTable = readTypeOverrides();
+
+    function writeTypeOverrides(table) {
+      typeOverrideTable = table && typeof table === "object" && !Array.isArray(table) ? table : {};
+      if (state.staleTab) {
+        toast("其他标签页已改过数据，请先刷新，避免覆盖");
+        return false;
+      }
+      try {
+        localStorage.setItem(TYPE_OVERRIDE_KEY, JSON.stringify(typeOverrideTable));
+        return true;
+      } catch {
+        state.unsaved = true;
+        paintNotices();
+        toast("还没保存到本机，类型记忆请立即导出");
+        return false;
+      }
+    }
+
+    function overrideType(name) {
+      const value = typeOverrideTable[gunKey(name)];
+      return value && TYPE_NAME[value] && value !== "all" ? value : null;
+    }
+
+    function rememberType(name, type) {
+      const key = gunKey(name);
+      if (!key || !TYPE_NAME[type] || type === "all") return;
+      const table = { ...typeOverrideTable };
+      table[key] = type;
+      writeTypeOverrides(table);
+      state.items.forEach((item) => {
+        if (gunKey(item.name) === key) item.type = type;
+      });
+    }
+
+    function chooseType({ name, code, hint }) {
+      const forced = overrideType(name);
+      if (forced) return forced;
+      const inferred = inferTypeFromCode(code) || inferTypeFromCode(name);
+      if (inferred) return inferred;
+      const known = dictionaryWeapon(name);
+      if (known) return known.type;
+      if (hint && TYPE_NAME[hint] && hint !== "all") return hint;
+      return "other";
+    }
+
+    function suggestType(item) {
+      if (overrideType(item.name)) return null;
+      const inferred = inferTypeFromCode(item.code) || inferTypeFromCode(item.name);
+      if (inferred) return inferred;
+      const known = dictionaryWeapon(item.name);
+      return known ? known.type : null;
+    }
+
+    function applyKnownTypes() {
+      let changed = 0;
+      state.items.forEach((item) => {
+        const forced = overrideType(item.name);
+        if (forced) {
+          if (item.type !== forced) {
+            item.type = forced;
+            changed += 1;
+          }
+          return;
+        }
+        if (item.type && item.type !== "other") return;
+        const next = suggestType(item);
+        if (next && next !== "other" && next !== item.type) {
+          item.type = next;
+          changed += 1;
+        }
+      });
+      if (changed) save();
+      return changed;
+    }
+
+    function retypeUnlocked() {
+      let changed = 0;
+      state.items.forEach((item) => {
+        const next = suggestType(item);
+        if (!next || next === item.type) return;
+        item.type = next;
+        changed += 1;
+      });
+      if (changed) save();
+      render();
+      toast(changed ? `已更新 ${changed} 条分类` : "没有需要更新的分类");
+    }
+    function splitWeaponAndType(label) {
+      const text = String(label || "").trim();
+      if (!text) return null;
+      const inferred = inferTypeFromCode(text);
+      for (const [cat, type] of CATEGORY_SUFFIX) {
+        if (text.endsWith(cat)) {
+          const bare = text.slice(0, -cat.length).trim();
+          const known = dictionaryWeapon(bare);
+          return { name: known ? known.name : bare, type: known ? known.type : (inferred || type) };
+        }
+      }
+      const known = dictionaryWeapon(text);
+      if (known) return { name: known.name, type: inferred || known.type };
+      if (inferred) return { name: text, type: inferred };
+      return { name: text, type: "other" };
+    }
+
+    function parseShareLine(line, current) {
+      const m = line.match(/^(.*?)\s*·\s*(?:(\d+(?:\.\d+)?)\s*([wW万])\s+)?(?:(.+?)-烽火地带-)?([A-Za-z0-9]{16,})\s*[—\-]?\s*$/);
+      if (!m) return null;
+      let note = (m[1] || "").trim();
+      if (isSeparator(note) || note === "—" || note === "-") note = "";
+      const price = m[2] ? normalizePrice(m[2] + (m[3] || "")) : "";
+      const label = (m[4] || "").trim();
+      const parsed = label ? splitWeaponAndType(label) : current;
+      const name = (parsed && parsed.name) || (current && current.name) || "未识别";
+      const type = (parsed && parsed.type) || (current && current.type) || "other";
+      return { name, type, code: m[5], price, note };
+    }
+
+    function parseBulk(text) {
+      const cleaned = text.replace(/\r/g, "").trim();
+      if (!cleaned) return [];
+      if (cleaned.startsWith("[") || cleaned.startsWith("{")) {
+        try {
+          const data = JSON.parse(cleaned);
+          const arr = Array.isArray(data) ? data : (data.items || []);
+          return arr.map((r) => ({
+            name: r.name || "未识别",
+            type: r.type || (findWeapon(r.name || "") || {}).type || "other",
+            code: r.code || "",
+            price: normalizePrice(r.price || ""),
+            note: r.note || ""
+          }));
+        } catch {}
+      }
+
+      const entries = [];
+      let current = null;
+      let lastEntry = null;
+      let pendingNote = "";
+
+      const pushEntry = (row) => {
+        if (!row || !row.code || isSeparator(row.code)) return;
+        const item = {
+          name: row.name || "未识别",
+          type: row.type || "other",
+          code: row.code,
+          price: normalizePrice(row.price || ""),
+          note: row.note || ""
+        };
+        item.ownGun = row.ownGun === true;
+        entries.push(item);
+        lastEntry = item;
+        current = {
+          name: item.name,
+          type: item.type,
+          tierNote: current && current.name === item.name ? (current.tierNote || "") : ""
+        };
+      };
+
+      const appendNote = (line) => {
+        if (!lastEntry) return;
+        let note = String(line || "").trim();
+        note = note.replace(/^(屏注|备注|说明)\s*[:：]\s*/, "");
+        note = note.replace(/^P\.?\s*S\.?\s*[:.：]\s*/i, "");
+        note = note.trim();
+        if (!note || isSeparator(note)) return;
+        lastEntry.note = joinNoteParts(lastEntry.note, note);
+      };
+
+      const rawLines = cleaned.split("\n");
+      for (const raw of rawLines) {
+        const line = raw.trim();
+        if (isCommentLine(line)) continue;
+        if (isSeparator(line)) continue;
+
+        const zoneLine = parseZoneLine(line);
+        if (zoneLine) {
+          if (pendingNote) {
+            zoneLine.note = joinNoteParts(pendingNote, zoneLine.note);
+            pendingNote = "";
+          }
+          pushEntry(zoneLine);
+          continue;
+        }
+
+        const header = parseGunHeader(line);
+        if (header) {
+          pendingNote = "";
+          current = { name: header.name, type: header.type, tierNote: header.tierNote || "" };
+          continue;
+        }
+
+        const plan = parsePlanLine(line, current);
+        if (plan) {
+          if (pendingNote) {
+            plan.note = joinNoteParts(pendingNote, plan.note);
+            pendingNote = "";
+          }
+          pushEntry(plan);
+          continue;
+        }
+
+        if (/^(?!屏注|备注|说明)([^:：]{1,12})[：:]$/.test(line)) {
+          pendingNote = joinNoteParts(pendingNote, line.replace(/[：:]\s*$/, "").trim());
+          continue;
+        }
+
+        if (isNoteOnlyLine(line) || (lastEntry && !extractCodeToken(line))) {
+          if (lastEntry) {
+            appendNote(line);
+            continue;
+          }
+        }
+      }
+
+      return entries.filter((e) => e.code);
+    }
+
+    function renderCats() {
+      const counts = Object.fromEntries(TYPES.map((t) => [t.id, 0]));
+      counts.all = state.items.length;
+      state.items.forEach((it) => {
+        counts[it.type] = (counts[it.type] || 0) + 1;
+      });
+      document.getElementById("cats").innerHTML = TYPES.map((t) => `
+        <button class="cat ${state.category === t.id ? "active" : ""}" data-id="${t.id}" style="--accent:${TYPE_COLOR[t.id]}">
+          <b>${t.name}</b><span class="count">${counts[t.id] || 0}</span>
+        </button>
+      `).join("");
+    }
+
+    function inPriceBand(item) {
+      if (state.priceBand === "all") return true;
+      const value = priceValue(item.price);
+      if (state.priceBand === "none") return value < 0;
+      if (value < 0) return false;
+      if (state.priceBand === "low") return value < 300000;
+      if (state.priceBand === "mid") return value >= 300000 && value <= 600000;
+      if (state.priceBand === "high") return value > 600000;
+      return true;
+    }
+
+    function filtered() {
+      const q = state.query.trim().toLowerCase();
+      return state.items.filter((it) => {
+        if (state.category !== "all" && it.type !== state.category) return false;
+        if (state.favOnly && it.favorite !== true && !gunFavorite(it.name)) return false;
+        if (!inPriceBand(it)) return false;
+        if (!q) return true;
+        return [it.name, it.code, it.price, it.note, TYPE_NAME[it.type]].join(" ").toLowerCase().includes(q);
+      });
+    }
+
+    function starIcon() {
+      return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.48 3.5a.56.56 0 0 1 1.04 0l2.13 5.11a.56.56 0 0 0 .47.35l5.52.44a.56.56 0 0 1 .32.99l-4.2 3.6a.56.56 0 0 0-.18.56l1.28 5.38a.56.56 0 0 1-.84.61l-4.73-2.88a.56.56 0 0 0-.58 0l-4.73 2.88a.56.56 0 0 1-.84-.61l1.29-5.38a.56.56 0 0 0-.18-.56l-4.21-3.6a.56.56 0 0 1 .32-.99l5.52-.44a.56.56 0 0 0 .47-.35L11.48 3.5z"/></svg>`;
+    }
+
+    function renderBoard() {
+      const items = filtered();
+      document.querySelectorAll("#viewSwitch [data-view]").forEach((btn) => {
+        btn.classList.toggle("active", state.favOnly ? btn.dataset.view === "fav" : btn.dataset.view === "all");
+      });
+      document.querySelectorAll("#priceSwitch [data-price]").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.price === state.priceBand);
+      });
+      const filtering = state.category !== "all" || state.favOnly || state.priceBand !== "all" || state.query.trim();
+      const clearBtn = document.getElementById("clearFilters");
+      if (clearBtn) clearBtn.hidden = !filtering;
+      const anyFav = state.items.some((it) => it.favorite === true || gunFavorite(it.name));
+      document.getElementById("status").textContent = items.length
+        ? (state.favOnly ? "收藏的枪在本分类置顶；同枪里收藏方案再按价格从高到低" : "同枪多套方案按价格从高到低排列")
+        : (state.favOnly ? "点枪名星标可把该枪置顶本分类；点方案星标只在同枪方案里置顶。" : "粘贴改枪码后按回车生成，重复的不会添加");
+      const gunCount = new Set(state.items.map((x) => x.name)).size;
+      document.getElementById("stats").innerHTML = `
+        <span class="pill">方案 ${state.items.length}</span>
+        <span class="pill">枪种 ${gunCount}</span>
+      `;
+      if (!items.length) {
+        const emptyTitle = state.favOnly ? (anyFav ? "没有匹配的收藏" : "还没有收藏") : (state.items.length ? "没有匹配结果" : "还没有改枪码");
+        const emptyText = state.favOnly
+          ? (anyFav ? "换个分类、价格或关键词，或清除筛选。" : "点枪名星标可把该枪置顶本分类；点方案星标只在同枪方案里置顶。")
+          : (state.items.length ? "换个关键词、分类或价格，或清除筛选。" : "把改枪码贴到顶部输入框，按回车生成。");
+        document.getElementById("board").innerHTML = `
+          <div class="board-empty">
+            <h3>${emptyTitle}</h3>
+            <p>${emptyText}</p>
+          </div>`;
+        return;
+      }
+      const groups = new Map();
+      items.forEach((it) => {
+        const key = it.type + "::" + it.name;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(it);
+      });
+      groups.forEach((list) => list.sort((a, b) => {
+        const fav = Number(b.favorite === true) - Number(a.favorite === true);
+        if (fav) return fav;
+        return priceValue(b.price) - priceValue(a.price);
+      }));
+      const order = TYPES.map((t) => t.id).filter((id) => id !== "all");
+      const sorted = [...groups.entries()].sort((a, b) => {
+        const [ta, na] = a[0].split("::");
+        const [tb, nb] = b[0].split("::");
+        const d = order.indexOf(ta) - order.indexOf(tb);
+        if (d !== 0) return d;
+        const fa = gunFavorite(na) ? 0 : 1;
+        const fb = gunFavorite(nb) ? 0 : 1;
+        if (fa !== fb) return fa - fb;
+        return na.localeCompare(nb, "zh");
+      });
+      const markup = sorted.map(([key, list]) => {
+        const [type, name] = key.split("::");
+        const accent = TYPE_COLOR[type] || TYPE_COLOR.other;
+        const unknown = name === "未识别" ? `<p class="unknown-hint">未识别枪名。点「编辑」或「改分类」纠正，之后同名会沿用。</p>` : "";
+        const compare = list.length >= 2 ? `<button type="button" class="tag-btn" data-compare="${escapeHtml(name)}" data-compare-type="${escapeHtml(type)}">对比</button>` : "";
+        return `
+          <section class="gun-block">
+            <div class="gun-head">
+              <button type="button" class="btn-fav ${gunFavorite(name) ? "on" : ""}" data-gun-fav="${escapeHtml(name)}" aria-pressed="${gunFavorite(name) ? "true" : "false"}" aria-label="${gunFavorite(name) ? "取消收藏该枪" : "收藏该枪"}">${starIcon()}</button>
+              <h2>${escapeHtml(name)}</h2>
+              <span class="tag">${TYPE_NAME[type] || "特殊"} · ${list.length} 套</span>
+              ${compare}
+              <button type="button" class="tag-btn" data-retype="${escapeHtml(name)}">改分类</button>
+            </div>
+            ${unknown}
+            <div class="cards">
+              ${list.map((it) => {
+                const price = displayPrice(it.price);
+                const note = (it.note || "").trim();
+                return `
+                <article class="card" data-id="${escapeHtml(it.id)}" style="--accent:${accent}${quietBoard ? ";animation:none" : ""}">
+                  <div class="card-top">
+                    <button type="button" class="note-title ${note ? "" : "empty"}" data-note-open="${it.id}">${escapeHtml(note || "未命名方案")}</button>
+                    <input class="note-input" data-note="${it.id}" value="${escapeHtml(note)}" placeholder="备注，如性价比高" />
+                    <button type="button" class="price ${price.empty ? "empty" : ""}" data-price-open="${it.id}" title="点击修改价格">${price.html}</button>
+                    <input class="price-input" data-price="${it.id}" value="${escapeHtml(it.price || "")}" inputmode="decimal" enterkeyhint="done" placeholder="30w" aria-label="价格" />
+                  </div>
+                  <button type="button" class="code-line" data-copy="${it.id}" title="点击复制">${escapeHtml(it.code || "（空）")}</button>
+                  <div class="card-ops">
+                    <button type="button" class="btn-fav ${it.favorite ? "on" : ""}" data-fav="${it.id}" aria-pressed="${it.favorite ? "true" : "false"}" aria-label="${it.favorite ? "取消收藏" : "收藏"}">${starIcon()}</button>
+                    <button type="button" data-share="${it.id}">分享</button>
+                    <button type="button" data-edit="${it.id}">编辑</button>
+                    <button type="button" class="btn-del" data-del="${it.id}">删除</button>
+                  </div>
+                </article>`;
+              }).join("")}
+            </div>
+          </section>`;
+      }).join("");
+      document.getElementById("board").innerHTML = markup;
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+    }
+
+    function render() {
+      renderCats();
+      renderBoard();
+    }
+
+    function readGunFavs() {
+      try {
+        const data = JSON.parse(localStorage.getItem(GUN_FAV_KEY) || "{}");
+        if (!data || typeof data !== "object" || Array.isArray(data)) return {};
+        return data;
+      } catch {
+        return {};
+      }
+    }
+
+    let gunFavTable = readGunFavs();
+
+    function gunFavorite(name) {
+      return gunFavTable[name] === true;
+    }
+
+    function writeGunFavs(table) {
+      gunFavTable = table && typeof table === "object" && !Array.isArray(table) ? table : {};
+      if (state.staleTab) {
+        toast("其他标签页已改过数据，请先刷新，避免覆盖");
+        return false;
+      }
+      try {
+        localStorage.setItem(GUN_FAV_KEY, JSON.stringify(gunFavTable));
+        return true;
+      } catch {
+        state.unsaved = true;
+        paintNotices();
+        toast("还没保存到本机，枪组收藏请立即导出");
+        return false;
+      }
+    }
+
+    function mergeGunFavorites(incoming) {
+      if (!incoming || typeof incoming !== "object" || Array.isArray(incoming)) return;
+      const table = { ...gunFavTable };
+      Object.entries(incoming).forEach(([name, on]) => {
+        if (name && on === true) table[name] = true;
+      });
+      writeGunFavs(table);
+    }
+
+    function paintStar(btn, on, label) {
+      if (!btn) return;
+      btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.setAttribute("aria-label", label);
+    }
+
+    function favVisibleKey() {
+      if (!state.favOnly) return "";
+      return filtered().map((it) => it.id).join("|");
+    }
+
+    let quietBoard = false;
+
+    function refreshBoardQuiet() {
+      const scroller = document.querySelector("main");
+      const snapshot = {
+        x: window.scrollX,
+        y: window.scrollY,
+        main: scroller ? scroller.scrollTop : 0
+      };
+      const active = document.activeElement;
+      if (active && active !== document.body && typeof active.blur === "function") {
+        active.blur({ preventScroll: true });
+      }
+      quietBoard = true;
+      renderBoard();
+      quietBoard = false;
+      const restore = () => {
+        window.scrollTo(snapshot.x, snapshot.y);
+        if (scroller) scroller.scrollTop = snapshot.main;
+      };
+      restore();
+      requestAnimationFrame(restore);
+    }
+
+    function toggleItemFavorite(id, btn) {
+      const item = state.items.find((x) => x.id === id);
+      if (!item) return;
+      const before = favVisibleKey();
+      item.favorite = item.favorite !== true;
+      save();
+      const siblings = filtered().filter((it) => it.type === item.type && it.name === item.name);
+      if ((state.favOnly && favVisibleKey() !== before) || siblings.length > 1) refreshBoardQuiet();
+      else paintStar(btn, item.favorite === true, item.favorite ? "取消收藏" : "收藏");
+    }
+
+    function toggleGunFavorite(name, btn) {
+      const before = favVisibleKey();
+      const table = { ...gunFavTable };
+      const next = table[name] !== true;
+      if (next) table[name] = true;
+      else delete table[name];
+      writeGunFavs(table);
+      const sample = state.items.find((it) => it.name === name);
+      const gunsInType = new Set(filtered().filter((it) => sample && it.type === sample.type).map((it) => it.name));
+      if ((state.favOnly && favVisibleKey() !== before) || gunsInType.size > 1) refreshBoardQuiet();
+      else paintStar(btn, next, next ? "取消收藏该枪" : "收藏该枪");
+    }
+
+    function fillTypeSelect(selected) {
+      document.getElementById("editType").innerHTML = TYPES.filter((t) => t.id !== "all").map((t) =>
+        `<option value="${t.id}" ${t.id === selected ? "selected" : ""}>${t.name}</option>`
+      ).join("");
+    }
+
+    function codeKey(code) {
+      return String(code || "").replace(/\s/g, "").toLowerCase();
+    }
+
+    function findSame(item, list) {
+      const key = codeKey(item.code);
+      if (key) return list.find((x) => codeKey(x.code) === key) || null;
+      return list.find((x) => x.name === item.name && !codeKey(x.code) && (x.price || "") === (item.price || "")) || null;
+    }
+
+    function addRows(rows) {
+      let added = 0;
+      let skipped = 0;
+      let moved = 0;
+      const ids = [];
+      const dupIds = [];
+      const seen = state.items.slice();
+      rows.forEach((r) => {
+        if (!r || typeof r !== "object") {
+          skipped += 1;
+          return;
+        }
+        const fromText = explicitGunLabel(r.note) || explicitGunLabel(r.name);
+        const known = dictionaryWeapon((fromText && fromText.name) || r.name || "");
+        const name = (fromText && fromText.name) || (known ? known.name : (r.name || "未识别"));
+        const explicit = r.ownGun === true || !!fromText;
+        const item = {
+          id: uid(),
+          name,
+          type: chooseType({ name, code: String(r.code || ""), hint: (fromText && fromText.type) || r.type }),
+          code: String(r.code || "").trim(),
+          price: normalizePrice(r.price),
+          note: fromText ? stripGunLabelNote(r.note) : String(r.note || "").trim(),
+          favorite: r.favorite === true,
+          createdAt: Date.now()
+        };
+        const same = findSame(item, seen);
+        if (same) {
+          if (explicit && dictionaryWeapon(name) && name !== same.name) {
+            same.name = name;
+            same.type = overrideType(name) || item.type;
+            moved += 1;
+          }
+          if (item.favorite === true && same.favorite !== true) same.favorite = true;
+          skipped += 1;
+          if (same.id && !dupIds.includes(same.id)) dupIds.push(same.id);
+          return;
+        }
+        seen.push(item);
+        state.items.push(item);
+        ids.push(item.id);
+        added += 1;
+      });
+      return { added, skipped, ids, dupIds, moved };
+    }
+
+    let suppressInputScroll = false;
+    let focusScrollTimer = null;
+    let searchTimer = null;
+    let highlightTimer = null;
+
+    function itemMatchesQuery(item, query) {
+      const q = String(query || "").trim().toLowerCase();
+      if (!q) return true;
+      return [item.name, item.code, item.price, item.note, TYPE_NAME[item.type]].join(" ").toLowerCase().includes(q);
+    }
+
+    function ensureVisible(items) {
+      const notes = [];
+      const hiddenByCategory = items.some((item) => state.category !== "all" && item.type !== state.category);
+      if (hiddenByCategory) {
+        const types = new Set(items.map((item) => item.type));
+        if (types.size === 1) {
+          state.category = [...types][0];
+          notes.push(`已切换到${TYPE_NAME[state.category] || "该分类"}，以显示该方案`);
+        } else {
+          state.category = "all";
+          notes.push("已切换到全部，以显示该方案");
+        }
+      }
+      if (state.query && items.some((item) => !itemMatchesQuery(item, state.query))) {
+        state.query = "";
+        clearTimeout(searchTimer);
+        const box = document.getElementById("q");
+        if (box) box.value = "";
+        notes.push("已清空搜索，以显示该方案");
+      }
+      if (state.priceBand !== "all" && items.some((item) => !inPriceBand(item))) {
+        state.priceBand = "all";
+        notes.push("已取消价格筛选，以显示该方案");
+      }
+      if (state.favOnly && items.some((item) => item.favorite !== true && !gunFavorite(item.name))) {
+        state.favOnly = false;
+        notes.push("已退出只看收藏，以显示该方案");
+      }
+      return notes;
+    }
+
+    function cardById(id) {
+      const value = window.CSS && CSS.escape ? CSS.escape(id) : String(id).replace(/"/g, '\\"');
+      return document.querySelector(`article.card[data-id="${value}"]`);
+    }
+
+    function focusNewCards(ids) {
+      const main = document.querySelector("main");
+      const cards = ids.map(cardById).filter(Boolean);
+      if (!main || !cards.length) return;
+      cards.forEach((card) => card.classList.add("is-new"));
+      cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+      const target = cards[0];
+      const cardRect = target.getBoundingClientRect();
+      const mainRect = main.getBoundingClientRect();
+      const mainScrolls = /(auto|scroll)/.test(getComputedStyle(main).overflowY);
+      const scroller = mainScrolls ? main : (document.scrollingElement || document.documentElement);
+      const delta = cardRect.top - mainRect.top - (mainRect.height - cardRect.height) / 2;
+      scroller.scrollTo({ top: Math.max(0, scroller.scrollTop + delta), behavior: "smooth" });
+      clearTimeout(highlightTimer);
+      highlightTimer = setTimeout(() => {
+        cards.forEach((card) => card.classList.remove("is-new"));
+      }, 1800);
+    }
+
+    function revealItems(ids) {
+      const items = ids.map((id) => state.items.find((item) => item.id === id)).filter(Boolean);
+      if (!items.length) return [];
+      const notes = ensureVisible(items);
+      suppressInputScroll = true;
+      clearTimeout(focusScrollTimer);
+      const box = document.getElementById("quickAdd");
+      if (box && document.activeElement === box) box.blur();
+      render();
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => focusNewCards(ids));
+      });
+      setTimeout(() => {
+        suppressInputScroll = false;
+      }, 800);
+      return notes;
+    }
+
+    function reportMerge(result, verb) {
+      const dupIds = result.dupIds || [];
+      const jumpIds = result.added ? result.ids : dupIds;
+      const notes = jumpIds.length ? revealItems(jumpIds) : [];
+      if (!jumpIds.length) render();
+      const extra = notes.length ? `。${notes.join("。")}` : "";
+      if (!result.added && result.skipped) {
+        const base = result.moved
+          ? `已有该改枪码，已把 ${result.moved} 套归到对应的枪`
+          : (result.skipped === 1 ? "已有该改枪码" : `已有 ${result.skipped} 条相同改枪码，未重复添加`);
+        toast(base + extra);
+        return;
+      }
+      if (result.added) {
+        let base = `新增 ${result.added} 条改枪码`;
+        if (result.moved) base += `，${result.moved} 套已归到对应的枪`;
+        else if (result.skipped) base += `，${result.skipped} 条已有`;
+        base += "，Ctrl+Z 可撤回";
+        rememberAdded(result.ids, base + extra);
+        return;
+      }
+      toast(`${verb} ${result.added} 套方案` + extra);
+    }
+
+    function ingestText(text) {
+      const rows = parseBulk(text);
+      if (!rows.length) {
+        toast("没有解析到改枪码");
+        return false;
+      }
+      const result = addRows(rows);
+      save();
+      reportMerge(result, "已生成");
+      return result.added > 0 || result.skipped > 0;
+    }
+
+    function appliedSeedVersion() {
+      const current = localStorage.getItem(SEED_VERSION_KEY);
+      if (current) return Number(current) || 0;
+      if (localStorage.getItem(SEED_KEY)) return 1;
+      return 0;
+    }
+
+    function applySeed() {
+      if (appliedSeedVersion() >= SEED_VERSION) return 0;
+      const { added } = addRows(parseBulk(SEED_TEXT));
+      localStorage.setItem(SEED_VERSION_KEY, String(SEED_VERSION));
+      save();
+      return added;
+    }
+
+    function isBackup(data) {
+      return !!(data && typeof data === "object" && !Array.isArray(data) && Array.isArray(data.items));
+    }
+
+    function classifyPaste(text) {
+      const trimmed = String(text || "").trim();
+      if (trimmed.startsWith(SHARE_PREFIX)) return { kind: "share", text: trimmed };
+      if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+        let data;
+        try {
+          data = JSON.parse(trimmed);
+        } catch {
+          return { kind: "bad-json" };
+        }
+        if (Array.isArray(data)) return { kind: "rows", data };
+        if (isBackup(data)) return { kind: "backup", data };
+        return { kind: "bad-shape" };
+      }
+      return { kind: "codes", text: trimmed };
+    }
+
+    function rowsFrom(data) {
+      if (Array.isArray(data)) return data.filter((row) => row && typeof row === "object");
+      if (isBackup(data)) return data.items.filter((row) => row && typeof row === "object");
+      return null;
+    }
+
+    function mergeTypeOverrides(incoming) {
+      if (!incoming || typeof incoming !== "object" || Array.isArray(incoming)) return;
+      const table = { ...typeOverrideTable };
+      Object.entries(incoming).forEach(([key, type]) => {
+        if (!key || table[key] || !TYPE_NAME[type] || type === "all") return;
+        table[key] = type;
+      });
+      writeTypeOverrides(table);
+    }
+
+    function mergePayload(data) {
+      const rows = rowsFrom(data);
+      if (!rows) {
+        toast("导入失败：不是方案数组");
+        return false;
+      }
+      if (isBackup(data)) {
+        mergeGunFavorites(data.gunFavorites);
+        mergeTypeOverrides(data.typeOverrides);
+      }
+      if (!rows.length) {
+        toast("没有可导入的方案");
+        render();
+        return true;
+      }
+      const result = addRows(rows);
+      save();
+      reportMerge(result, "已导入");
+      return true;
+    }
+
+    function keptType(type, name, code) {
+      if (type && TYPE_NAME[type] && type !== "all") return type;
+      return chooseType({ name, code, hint: type });
+    }
+
+    function restoreBackup(data) {
+      if (!isBackup(data)) {
+        toast("导入失败：不是完整备份，没有覆盖本地数据");
+        return;
+      }
+      const snapshot = {
+        items: state.items.map((item) => ({ ...item })),
+        gunFavorites: { ...gunFavTable },
+        typeOverrides: { ...typeOverrideTable }
+      };
+      state.items = data.items.filter((row) => row && typeof row === "object").map((row) => {
+        const known = dictionaryWeapon(row.name || "");
+        const name = known ? known.name : (String(row.name || "").trim() || "未识别");
+        const code = String(row.code || "").trim();
+        return {
+          id: row.id ? String(row.id) : uid(),
+          name,
+          type: keptType(row.type, name, code),
+          code,
+          price: normalizePrice(row.price || ""),
+          note: String(row.note || "").trim(),
+          favorite: row.favorite === true,
+          createdAt: row.createdAt || Date.now()
+        };
+      });
+      const favs = {};
+      if (data.gunFavorites && typeof data.gunFavorites === "object" && !Array.isArray(data.gunFavorites)) {
+        Object.entries(data.gunFavorites).forEach(([name, on]) => {
+          if (name && on === true) favs[name] = true;
+        });
+      }
+      const types = {};
+      if (data.typeOverrides && typeof data.typeOverrides === "object" && !Array.isArray(data.typeOverrides)) {
+        Object.entries(data.typeOverrides).forEach(([key, type]) => {
+          if (key && TYPE_NAME[type] && type !== "all") types[key] = type;
+        });
+      }
+      writeGunFavs(favs);
+      writeTypeOverrides(types);
+      const saved = save();
+      markBackedUp();
+      render();
+      rememberSnapshot(snapshot, saved ? `已恢复 ${state.items.length} 套方案` : `已恢复 ${state.items.length} 套，但还没保存到本机`);
+    }
+
+    function shareRecord(item) {
+      const type = item.type && TYPE_NAME[item.type] && item.type !== "all" ? item.type : "other";
+      return {
+        name: String(item.name || ""),
+        type,
+        code: String(item.code || ""),
+        price: String(item.price || ""),
+        note: String(item.note || ""),
+        favorite: item.favorite === true
+      };
+    }
+
+    function encodeShare(items) {
+      const json = JSON.stringify(items.map(shareRecord));
+      return SHARE_PREFIX + btoa(unescape(encodeURIComponent(json))).replace(/=+$/, "");
+    }
+
+    function decodeShare(text) {
+      const raw = String(text || "").trim();
+      if (!raw.startsWith(SHARE_PREFIX)) {
+        toast("分享码无法解码，没有写入");
+        return null;
+      }
+      try {
+        let b64 = raw.slice(SHARE_PREFIX.length).replace(/-/g, "+").replace(/_/g, "/");
+        b64 += "=".repeat((4 - (b64.length % 4)) % 4);
+        const json = decodeURIComponent(escape(atob(b64)));
+        const data = JSON.parse(json);
+        if (!Array.isArray(data) || !data.length) throw new Error("empty");
+        return data.map((row) => {
+          if (!row || typeof row !== "object" || Array.isArray(row)) throw new Error("row");
+          return shareRecord(row);
+        });
+      } catch {
+        toast("分享码无法解码，没有写入");
+        return null;
+      }
+    }
+
+    function readableShare(item) {
+      const bits = [item.name || "未识别"];
+      const meta = [item.note, item.price].filter(Boolean).join(" · ");
+      if (meta) bits.push(meta);
+      if (item.code) bits.push(item.code);
+      return bits.join("\n");
+    }
+
+    function backupPayload(items) {
+      return {
+        version: BACKUP_VERSION,
+        exportedAt: new Date().toISOString(),
+        items: items || state.items,
+        gunFavorites: gunFavTable,
+        typeOverrides: typeOverrideTable
+      };
+    }
+
+    function backupName() {
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, "0");
+      return `delta-gun-codes-${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}.json`;
+    }
+
+    function downloadJson(data, name) {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name || backupName();
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function markBackedUp() {
+      try {
+        localStorage.setItem(BACKUP_AT_KEY, String(Date.now()));
+      } catch {}
+      paintNotices();
+    }
+
+    function exportBackup() {
+      downloadJson(backupPayload());
+      markBackedUp();
+      toast("已导出备份");
+    }
+
+    function paintNotices() {
+      const bar = document.getElementById("backupBar");
+      const unsaved = document.getElementById("unsavedBar");
+      const stale = document.getElementById("staleBar");
+      if (unsaved) unsaved.hidden = !state.unsaved;
+      if (stale) stale.hidden = !state.staleTab;
+      if (!bar) return;
+      if (!state.items.length) {
+        bar.hidden = true;
+        return;
+      }
+      const at = Number(localStorage.getItem(BACKUP_AT_KEY) || 0);
+      if (at && Date.now() - at <= FORTNIGHT) {
+        bar.hidden = true;
+        return;
+      }
+      const snooze = Number(localStorage.getItem(BACKUP_SNOOZE_KEY) || 0);
+      bar.hidden = !!(snooze && Date.now() < snooze);
+    }
+
+    function askBackupChoice(data, done) {
+      document.getElementById("confirmTitle").textContent = "发现一份备份";
+      document.getElementById("confirmText").textContent = "合并只添加本地没有的方案，收藏和分类记忆只补充、不删除。恢复会用这份备份覆盖本机方案、枪组收藏和分类记忆，完成后可以撤回。";
+      const alt = document.getElementById("confirmAlt");
+      alt.hidden = false;
+      alt.textContent = "合并";
+      alt.className = "";
+      const ok = document.getElementById("confirmOk");
+      ok.textContent = "恢复";
+      ok.className = "btn-danger";
+      confirmAltAction = () => {
+        mergePayload(data);
+        if (done) done();
+      };
+      confirmAction = () => {
+        restoreBackup(data);
+        if (done) done();
+      };
+      document.getElementById("confirmOverlay").classList.add("show");
+    }
+
+    function importRows(text, mode) {
+      const trimmed = String(text || "").trim();
+      if (mode === "restore") {
+        let data;
+        try {
+          data = JSON.parse(trimmed);
+        } catch {
+          toast("导入失败：不是合法的 JSON");
+          return;
+        }
+        if (!isBackup(data)) {
+          toast("导入失败：不是完整备份，没有覆盖本地数据");
+          return;
+        }
+        askConfirm({
+          title: "用备份恢复",
+          text: "这会覆盖本机的方案、枪组收藏和分类记忆。完成后可以撤回。",
+          okLabel: "恢复",
+          onOk: () => restoreBackup(data)
+        });
+        return;
+      }
+
+      if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+        try {
+          const data = JSON.parse(trimmed);
+          if (!rowsFrom(data)) {
+            toast("导入失败：文件内容需要是方案数组");
+            return;
+          }
+          mergePayload(data);
+          return;
+        } catch {
+          /* 不是合法 JSON，改走文本清单解析 */
+        }
+      }
+
+      const rows = parseBulk(trimmed);
+      if (!rows.length) {
+        toast("没有解析到改枪码");
+        return;
+      }
+      const result = addRows(rows);
+      save();
+      reportMerge(result, "已导入");
+    }
+
+    function ingestFromBox() {
+      const box = document.getElementById("quickAdd");
+      const text = box.value.trim();
+      if (!text) return toast("先粘贴改枪码");
+      const kind = classifyPaste(text);
+      if (kind.kind === "bad-json") return toast("导入失败：不是合法的 JSON");
+      if (kind.kind === "bad-shape") return toast("导入失败：不是方案数组");
+      if (kind.kind === "backup") {
+        askBackupChoice(kind.data, () => { box.value = ""; });
+        return;
+      }
+      if (kind.kind === "share") {
+        const rows = decodeShare(kind.text);
+        if (!rows) return;
+        const result = addRows(rows);
+        save();
+        reportMerge(result, "已并入分享码");
+        box.value = "";
+        return;
+      }
+      if (kind.kind === "rows") {
+        mergePayload(kind.data);
+        box.value = "";
+        return;
+      }
+      if (ingestText(text)) box.value = "";
+    }
+
+    function shareFile(items) {
+      const favs = {};
+      const types = {};
+      items.forEach((item) => {
+        if (gunFavorite(item.name)) favs[item.name] = true;
+        const key = gunKey(item.name);
+        if (typeOverrideTable[key]) types[key] = typeOverrideTable[key];
+      });
+      downloadJson({
+        version: BACKUP_VERSION,
+        exportedAt: new Date().toISOString(),
+        items,
+        gunFavorites: favs,
+        typeOverrides: types
+      });
+    }
+
+    async function shareEncoded(items, label) {
+      if (!items.length) return toast("没有可分享的方案");
+      let code = "";
+      try {
+        code = encodeShare(items);
+      } catch {
+        shareFile(items);
+        toast("分享码生成失败，已改为下载 JSON");
+        return;
+      }
+      if (code.length > SHARE_LIMIT) {
+        shareFile(items);
+        toast("内容较长，已改为下载 JSON，没有截断");
+        return;
+      }
+      const ok = await copyText(code);
+      if (!ok) {
+        shareFile(items);
+        toast("复制失败，已改为下载 JSON");
+        return;
+      }
+      toast(label || "已复制分享码");
+    }
+
+    function cardImage(item) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 900;
+      canvas.height = 420;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return Promise.reject(new Error("canvas"));
+      ctx.fillStyle = "#121212";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#1e1e1e";
+      ctx.fillRect(36, 36, 828, 348);
+      ctx.fillStyle = "#ff9500";
+      ctx.fillRect(36, 36, 828, 8);
+      ctx.fillStyle = "#e8e8e8";
+      ctx.font = "600 40px sans-serif";
+      ctx.fillText(item.name || "未识别", 64, 120);
+      ctx.fillStyle = "#888888";
+      ctx.font = "28px sans-serif";
+      ctx.fillText([item.note, item.price || "未标价"].filter(Boolean).join(" · "), 64, 180);
+      ctx.fillStyle = "#b0b0b0";
+      ctx.font = "24px sans-serif";
+      const code = item.code || "";
+      for (let i = 0; i < code.length; i += 36) ctx.fillText(code.slice(i, i + 36), 64, 250 + Math.floor(i / 36) * 36);
+      return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error("blob")), "image/png");
+      });
+    }
+
+    async function shareOne(item) {
+      const text = readableShare(item);
+      try {
+        const blob = await cardImage(item);
+        const file = new File([blob], "gun-code.png", { type: "image/png" });
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ title: item.name || "改枪码", text, files: [file] });
+          return;
+        }
+      } catch (err) {
+        if (err && err.name === "AbortError") return;
+      }
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: item.name || "改枪码", text });
+          return;
+        }
+      } catch (err) {
+        if (err && err.name === "AbortError") return;
+      }
+      const ok = await copyText(text);
+      toast(ok ? "已复制分享文案" : "复制失败，请检查剪贴板权限");
+    }
+
+    function openEdit(id) {
+      const item = state.items.find((x) => x.id === id);
+      if (!item) return;
+      state.editingId = item.id;
+      document.getElementById("editName").value = item.name;
+      document.getElementById("editCode").value = item.code;
+      document.getElementById("editPrice").value = item.price;
+      document.getElementById("editNote").value = item.note;
+      fillTypeSelect(item.type);
+      document.getElementById("editOverlay").classList.add("show");
+    }
+
+    function closeEdit() {
+      document.getElementById("editOverlay").classList.remove("show");
+      state.editingId = null;
+    }
+
+    document.getElementById("cats").addEventListener("click", (e) => {
+      const btn = e.target.closest(".cat");
+      if (!btn) return;
+      state.category = btn.dataset.id;
+      render();
+    });
+
+    document.getElementById("q").addEventListener("input", (e) => {
+      const value = e.target.value;
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        state.query = value;
+        renderBoard();
+      }, 180);
+    });
+
+    document.getElementById("quickAddBtn").onclick = ingestFromBox;
+    document.getElementById("quickAdd").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        ingestFromBox();
+      }
+    });
+
+    let confirmAction = null;
+    let confirmAltAction = null;
+    let importMode = "merge";
+
+    function askConfirm({ title, text, okLabel, onOk }) {
+      document.getElementById("confirmTitle").textContent = title;
+      document.getElementById("confirmText").textContent = text;
+      const ok = document.getElementById("confirmOk");
+      ok.textContent = okLabel || "确定";
+      ok.className = "btn-danger";
+      document.getElementById("confirmTypeWrap").hidden = true;
+      confirmAction = onOk;
+      document.getElementById("confirmOverlay").classList.add("show");
+    }
+
+    function closeConfirm() {
+      document.getElementById("confirmOverlay").classList.remove("show");
+      document.getElementById("confirmTypeWrap").hidden = true;
+      document.getElementById("confirmOk").className = "btn-danger";
+      document.getElementById("confirmAlt").hidden = true;
+      confirmAction = null;
+      confirmAltAction = null;
+    }
+
+    function askRetype(name) {
+      const current = overrideType(name) || (state.items.find((item) => item.name === name) || {}).type || "other";
+      document.getElementById("confirmTitle").textContent = "修改分类";
+      document.getElementById("confirmText").textContent = `「${name}」的全部分案都会改成所选分类，并记住。`;
+      const wrap = document.getElementById("confirmTypeWrap");
+      wrap.hidden = false;
+      const select = document.getElementById("confirmType");
+      select.innerHTML = TYPES.filter((t) => t.id !== "all").map((t) =>
+        `<option value="${t.id}" ${t.id === current ? "selected" : ""}>${t.name}</option>`
+      ).join("");
+      const ok = document.getElementById("confirmOk");
+      ok.textContent = "保存";
+      ok.className = "btn-primary";
+      confirmAction = () => {
+        const type = select.value;
+        rememberType(name, type);
+        save();
+        render();
+        toast(`已将「${name}」记为${TYPE_NAME[type] || "特殊"}，后续同名会沿用`);
+      };
+      document.getElementById("confirmOverlay").classList.add("show");
+    }
+
+    function deleteItem(id) {
+      const item = state.items.find((x) => x.id === id);
+      if (!item) return;
+      const label = (item.note || "").trim() || item.name;
+      removeByIds([id], `已删除「${label}」`);
+    }
+
+    function openNote(card) {
+      const title = card.querySelector(".note-title");
+      const input = card.querySelector(".note-input");
+      if (!title || !input) return;
+      title.classList.add("editing");
+      input.classList.add("editing");
+      input.focus();
+      input.select();
+    }
+
+    function closeNote(input) {
+      const id = input.dataset.note;
+      const item = state.items.find((x) => x.id === id);
+      const card = input.closest(".card");
+      const title = card && card.querySelector(".note-title");
+      if (item) {
+        item.note = input.value.trim();
+        input.value = item.note;
+        save();
+      }
+      if (title) {
+        const note = item ? item.note : input.value.trim();
+        title.textContent = note || "未命名方案";
+        title.classList.toggle("empty", !note);
+        title.classList.remove("editing");
+      }
+      input.classList.remove("editing");
+    }
+
+    function openPrice(card) {
+      const pill = card.querySelector("[data-price-open]");
+      const input = card.querySelector(".price-input");
+      if (!pill || !input) return;
+      pill.classList.add("editing");
+      input.classList.add("editing");
+      input.focus();
+      input.select();
+    }
+
+    function closePrice(input) {
+      const id = input.dataset.price;
+      const item = state.items.find((x) => x.id === id);
+      const card = input.closest(".card");
+      const pill = card && card.querySelector("[data-price-open]");
+      let changed = false;
+      if (item) {
+        const next = normalizePrice(input.value);
+        changed = next !== (item.price || "");
+        item.price = next;
+        input.value = next;
+        if (changed) save();
+      }
+      if (changed && item) {
+        const siblings = state.items.filter((it) => it.type === item.type && it.name === item.name);
+        if (siblings.length > 1) {
+          refreshBoardQuiet();
+          return;
+        }
+      }
+      if (pill && item) {
+        const view = displayPrice(item.price);
+        pill.classList.toggle("empty", view.empty);
+        pill.innerHTML = view.html;
+        pill.classList.remove("editing");
+      }
+      input.classList.remove("editing");
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        document.body.appendChild(area);
+        area.select();
+        const ok = document.execCommand("copy");
+        area.remove();
+        return ok;
+      }
+    }
+
+    document.getElementById("viewSwitch").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-view]");
+      if (!btn) return;
+      state.favOnly = btn.dataset.view === "fav";
+      render();
+    });
+
+    document.getElementById("board").addEventListener("click", async (e) => {
+      const noteBtn = e.target.closest("[data-note-open]");
+      const priceBtn = e.target.closest("[data-price-open]");
+      const copyBtn = e.target.closest("[data-copy]");
+      const editBtn = e.target.closest("[data-edit]");
+      const delBtn = e.target.closest("[data-del]");
+      const gunBtn = e.target.closest("[data-gun-fav]");
+      const shareBtn = e.target.closest("[data-share]");
+      const compareBtn = e.target.closest("[data-compare]");
+      const favBtn = e.target.closest("[data-fav]");
+      const retypeBtn = e.target.closest("[data-retype]");
+      const open = document.querySelector(".note-input.editing");
+      const openPriceInput = document.querySelector(".price-input.editing");
+      if (open && e.target !== open) closeNote(open);
+      if (openPriceInput && e.target !== openPriceInput) closePrice(openPriceInput);
+      if (retypeBtn) {
+        askRetype(retypeBtn.dataset.retype);
+        return;
+      }
+      if (compareBtn) {
+        openCompare(compareBtn.dataset.compare, compareBtn.dataset.compareType);
+        return;
+      }
+      if (gunBtn) {
+        toggleGunFavorite(gunBtn.dataset.gunFav, gunBtn);
+        return;
+      }
+      if (favBtn) {
+        toggleItemFavorite(favBtn.dataset.fav, favBtn);
+        return;
+      }
+      if (noteBtn) {
+        const priceOpen = document.querySelector(".price-input.editing");
+        if (priceOpen) closePrice(priceOpen);
+        openNote(noteBtn.closest(".card"));
+        return;
+      }
+      if (priceBtn) {
+        const noteOpen = document.querySelector(".note-input.editing");
+        if (noteOpen) closeNote(noteOpen);
+        openPrice(priceBtn.closest(".card"));
+        return;
+      }
+      if (copyBtn) {
+        const item = state.items.find((x) => x.id === copyBtn.dataset.copy);
+        if (!item || !item.code) return;
+        const ok = await copyText(item.code);
+        if (!ok) return toast("复制失败，请检查剪贴板权限");
+        copyBtn.classList.add("copied");
+        toast("已复制改枪码");
+        setTimeout(() => copyBtn.classList.remove("copied"), 1200);
+      }
+      if (shareBtn) {
+        const item = state.items.find((x) => x.id === shareBtn.dataset.share);
+        if (item) shareOne(item);
+        return;
+      }
+      if (editBtn) openEdit(editBtn.dataset.edit);
+      if (delBtn) deleteItem(delBtn.dataset.del);
+    });
+
+    document.getElementById("board").addEventListener("focusout", (e) => {
+      if (e.target.dataset && e.target.dataset.note) closeNote(e.target);
+      if (e.target.dataset && e.target.dataset.price) closePrice(e.target);
+    });
+
+    document.getElementById("board").addEventListener("keydown", (e) => {
+      if ((e.target.dataset.note || e.target.dataset.price) && e.key === "Enter") {
+        e.preventDefault();
+        e.target.blur();
+      }
+    });
+
+    document.getElementById("cancelEdit").onclick = closeEdit;
+    document.getElementById("saveEdit").onclick = () => {
+      const name = document.getElementById("editName").value.trim();
+      const type = document.getElementById("editType").value;
+      const code = document.getElementById("editCode").value.trim();
+      const price = normalizePrice(document.getElementById("editPrice").value);
+      const note = document.getElementById("editNote").value.trim();
+      if (!name) return toast("请填写枪名");
+      if (!type || !TYPE_NAME[type] || type === "all") return toast("请选择枪械种类");
+      const item = state.items.find((x) => x.id === state.editingId);
+      if (!item) return;
+      const prevName = item.name;
+      const prevType = item.type;
+      const prevPrice = item.price || "";
+      item.name = name;
+      Object.assign(item, { code, price, note });
+      rememberType(name, type);
+      save();
+      closeEdit();
+      if (prevName !== item.name || prevType !== item.type || prevPrice !== (item.price || "")) {
+        const notes = revealItems([item.id]);
+        toast(notes.length ? `已保存。${notes.join("。")}` : `已将「${name}」记为${TYPE_NAME[type]}，后续同名会沿用`);
+      } else {
+        render();
+        toast(`已将「${name}」记为${TYPE_NAME[type]}，后续同名会沿用`);
+      }
+    };
+
+    document.getElementById("deleteEdit").onclick = () => {
+      if (!state.editingId) return;
+      deleteItem(state.editingId);
+    };
+
+    document.getElementById("importBtn").onclick = () => {
+      closeMore();
+      importMode = "merge";
+      document.getElementById("importFile").click();
+    };
+    document.getElementById("importFile").addEventListener("change", () => {
+      const input = document.getElementById("importFile");
+      const file = input.files && input.files[0];
+      const mode = importMode;
+      importMode = "merge";
+      input.value = "";
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          importRows(String(reader.result || ""), mode);
+        } catch {
+          toast("导入失败：文件无法读取");
+        }
+      };
+      reader.onerror = () => toast("导入失败：文件无法读取");
+      reader.readAsText(file);
+    });
+
+    document.getElementById("retypeBtn").onclick = () => {
+      askConfirm({
+        title: "重新自动分类",
+        text: "只更新还没有手动指定分类的方案。已经记住的枪名会跳过。",
+        okLabel: "开始归类",
+        onOk: retypeUnlocked
+      });
+    };
+
+    document.getElementById("exportBtn").onclick = exportBackup;
+
+    document.getElementById("clearBtn").onclick = () => {
+      if (!state.items.length) return;
+      askConfirm({
+        title: "清空全部",
+        text: "确定清空全部改枪码？此操作只影响本机保存的数据。",
+        okLabel: "清空",
+        onOk() {
+          const entries = state.items.map((item, index) => ({ index, item: { ...item } }));
+          state.items = [];
+          save();
+          render();
+          rememberRemoval(entries, "已清空全部方案");
+        }
+      });
+    };
+
+    document.getElementById("undoBtn").onclick = (e) => {
+      e.stopPropagation();
+      undoRemoval();
+    };
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (document.getElementById("compareOverlay").classList.contains("show")) {
+          e.preventDefault();
+          closeCompare();
+          return;
+        }
+        if (!document.getElementById("moreMenu").hidden) {
+          e.preventDefault();
+          closeMore();
+          return;
+        }
+        if (document.getElementById("editOverlay").classList.contains("show")) {
+          e.preventDefault();
+          closeEdit();
+          return;
+        }
+        if (document.getElementById("confirmOverlay").classList.contains("show")) {
+          e.preventDefault();
+          closeConfirm();
+          return;
+        }
+        if (e.target && e.target.id === "quickAdd") return;
+        if (e.target && e.target.id === "q") {
+          e.preventDefault();
+          e.target.value = "";
+          clearTimeout(searchTimer);
+          state.query = "";
+          renderBoard();
+        }
+        return;
+      }
+      if (e.key.toLowerCase() !== "z" || e.altKey || e.shiftKey || !(e.metaKey || e.ctrlKey)) return;
+      const el = e.target;
+      if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) && !el.readOnly && !el.disabled) return;
+      if ((!undoBatch || !undoBatch.length) && !undoSnapshot && !(undoAddedIds && undoAddedIds.length)) return;
+      e.preventDefault();
+      undoRemoval();
+    });
+    document.getElementById("confirmCancel").onclick = closeConfirm;
+    document.getElementById("confirmAlt").onclick = () => {
+      const action = confirmAltAction;
+      closeConfirm();
+      if (action) action();
+    };
+    document.getElementById("confirmOk").onclick = () => {
+      const action = confirmAction;
+      closeConfirm();
+      if (action) action();
+    };
+    document.getElementById("confirmOverlay").addEventListener("click", (ev) => {
+      if (ev.target.id === "confirmOverlay") closeConfirm();
+    });
+
+    function closeMore() {
+      const menu = document.getElementById("moreMenu");
+      const btn = document.getElementById("moreBtn");
+      if (menu) menu.hidden = true;
+      if (btn) btn.setAttribute("aria-expanded", "false");
+    }
+
+    function closeCompare() {
+      document.getElementById("compareOverlay").classList.remove("show");
+    }
+
+    function openCompare(name, type) {
+      const items = filtered().filter((item) => item.name === name && item.type === type);
+      if (items.length < 2) return toast("当前筛选下不足两套，无法对比");
+      const narrowed = state.query.trim() || state.priceBand !== "all" || state.favOnly;
+      document.getElementById("compareTitle").textContent = `${name} · ${TYPE_NAME[type] || ""}`;
+      document.getElementById("compareNote").textContent = narrowed ? "仅对比当前筛选结果" : "同一分组里的方案";
+      const body = document.getElementById("compareBody");
+      const draw = (list) => {
+        body.innerHTML = `<div class="compare-row">${list.map((item) => `
+          <article class="compare-card">
+            <p><strong>${escapeHtml(item.note || "未命名方案")}</strong></p>
+            <p>${escapeHtml(item.price || "未标价")}</p>
+            <p>${escapeHtml(item.code || "（空）")}</p>
+            <button type="button" data-compare-copy="${escapeHtml(item.id)}">复制这套</button>
+          </article>`).join("")}</div>`;
+      };
+      if (items.length <= 4) draw(items);
+      else {
+        body.innerHTML = `<div class="compare-pick">${items.map((item) => `
+          <label><input type="checkbox" value="${escapeHtml(item.id)}" /> ${escapeHtml(item.note || "未命名方案")} · ${escapeHtml(item.price || "未标价")}</label>
+        `).join("")}<button type="button" id="compareGo">对比所选（2–4 套）</button></div>`;
+        body.querySelector("#compareGo").onclick = () => {
+          const ids = [...body.querySelectorAll("input:checked")].map((input) => input.value);
+          if (ids.length < 2 || ids.length > 4) return toast("请勾选 2 到 4 套");
+          draw(items.filter((item) => ids.includes(item.id)));
+        };
+      }
+      document.getElementById("compareOverlay").classList.add("show");
+    }
+
+    document.getElementById("compareBody").addEventListener("click", async (e) => {
+      const btn = e.target.closest("[data-compare-copy]");
+      if (!btn) return;
+      const item = state.items.find((x) => x.id === btn.dataset.compareCopy);
+      if (!item || !item.code) return toast("这套没有改枪码");
+      const ok = await copyText(item.code);
+      toast(ok ? "已复制这套改枪码" : "复制失败，请检查剪贴板权限");
+    });
+    document.getElementById("compareClose").onclick = closeCompare;
+    document.getElementById("compareOverlay").addEventListener("click", (ev) => {
+      if (ev.target.id === "compareOverlay") closeCompare();
+    });
+
+    document.getElementById("moreBtn").onclick = () => {
+      const menu = document.getElementById("moreMenu");
+      const open = menu.hidden;
+      menu.hidden = !open;
+      document.getElementById("moreBtn").setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".more")) closeMore();
+    });
+    document.getElementById("copyAllBtn").onclick = async () => {
+      closeMore();
+      const ok = await copyText(JSON.stringify(backupPayload(), null, 2));
+      if (!ok) {
+        exportBackup();
+        toast("复制失败，已改为下载备份");
+        return;
+      }
+      markBackedUp();
+      toast("已复制全部数据");
+    };
+    document.getElementById("restoreBtn").onclick = () => {
+      closeMore();
+      importMode = "restore";
+      document.getElementById("importFile").click();
+    };
+    document.getElementById("shareViewBtn").onclick = () => {
+      closeMore();
+      shareEncoded(filtered(), "已复制当前结果的分享码");
+    };
+    document.getElementById("priceSwitch").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-price]");
+      if (!btn) return;
+      state.priceBand = btn.dataset.price;
+      render();
+    });
+    document.getElementById("clearFilters").onclick = () => {
+      state.category = "all";
+      state.query = "";
+      state.favOnly = false;
+      state.priceBand = "all";
+      clearTimeout(searchTimer);
+      const box = document.getElementById("q");
+      if (box) box.value = "";
+      render();
+    };
+    document.getElementById("backupNow").onclick = exportBackup;
+    document.getElementById("unsavedExport").onclick = exportBackup;
+    document.getElementById("backupDismiss").onclick = () => {
+      try {
+        localStorage.setItem(BACKUP_SNOOZE_KEY, String(Date.now() + FORTNIGHT));
+      } catch {
+        toast("无法记下关闭时间，下次打开仍会提醒");
+      }
+      paintNotices();
+    };
+    document.getElementById("staleReload").onclick = () => location.reload();
+    document.getElementById("updateReload").onclick = () => {
+      const url = new URL(location.href);
+      url.searchParams.set("_v", String(Date.now()));
+      location.replace(url.toString());
+    };
+    window.addEventListener("beforeunload", (e) => {
+      if (!state.unsaved) return;
+      e.preventDefault();
+      e.returnValue = "";
+    });
+    window.addEventListener("storage", (e) => {
+      if (![STORAGE_KEY, GUN_FAV_KEY, TYPE_OVERRIDE_KEY].includes(e.key)) return;
+      state.staleTab = true;
+      paintNotices();
+      toast("其他标签页已改过数据，请先刷新");
+    });
+    try {
+      const manifest = {
+        name: "三角洲改枪台",
+        short_name: "改枪台",
+        start_url: ".",
+        display: "standalone",
+        background_color: "#121212",
+        theme_color: "#121212",
+        icons: [{
+          src: document.querySelector("link[rel=icon]").href,
+          sizes: "any",
+          type: "image/svg+xml",
+          purpose: "any"
+        }]
+      };
+      document.getElementById("manifestLink").href = "data:application/manifest+json," + encodeURIComponent(JSON.stringify(manifest));
+    } catch {}
+    if (location.protocol === "http:" || location.protocol === "https:") {
+      fetch(location.href, { cache: "no-store" }).then((res) => res.text()).then((text) => {
+        const found = text.match(/APP_BUILD = "([^"]+)"/);
+        if (found && found[1] !== APP_BUILD) document.getElementById("updateBar").hidden = false;
+      }).catch(() => {});
+    }
+
+    document.getElementById("editName").addEventListener("change", () => {
+      const input = document.getElementById("editName");
+      const known = dictionaryWeapon(input.value);
+      if (known) input.value = known.name;
+      const name = input.value.trim();
+      document.getElementById("editType").value = chooseType({
+        name,
+        code: document.getElementById("editCode").value,
+        hint: document.getElementById("editType").value
+      });
+    });
+
+    document.getElementById("editPrice").addEventListener("blur", (e) => {
+      e.target.value = normalizePrice(e.target.value);
+    });
+
+    document.getElementById("editOverlay").addEventListener("click", (ev) => {
+      if (ev.target.id === "editOverlay") closeEdit();
+    });
+
+    function syncViewport() {
+      const vv = window.visualViewport;
+      const height = vv ? vv.height : window.innerHeight;
+      const kb = Math.max(0, window.innerHeight - height - (vv ? vv.offsetTop : 0));
+      document.documentElement.style.setProperty("--vvh", Math.round(height) + "px");
+      document.documentElement.style.setProperty("--kb", Math.round(kb) + "px");
+    }
+    syncViewport();
+    window.addEventListener("resize", syncViewport);
+    window.addEventListener("orientationchange", () => setTimeout(syncViewport, 250));
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", syncViewport);
+      window.visualViewport.addEventListener("scroll", syncViewport);
+    }
+    document.addEventListener("focusin", (e) => {
+      const el = e.target;
+      if (!(el instanceof HTMLElement)) return;
+      if (!/INPUT|TEXTAREA|SELECT/.test(el.tagName)) return;
+      clearTimeout(focusScrollTimer);
+      focusScrollTimer = setTimeout(() => {
+        focusScrollTimer = null;
+        if (suppressInputScroll) return;
+        syncViewport();
+        el.scrollIntoView({ block: "center", inline: "nearest" });
+      }, 300);
+    });
+
+    let seedAdded = 0;
+    let fixed = 0;
+    let retyped = 0;
+    try {
+      seedAdded = applySeed();
+      fixed = reclassifyStored();
+      retyped = applyKnownTypes();
+    } catch (err) {}
+    try {
+      if (seedAdded) toast(`已同步新增 ${seedAdded} 套官方方案`);
+      else if (fixed) toast(`已自动归类 ${fixed} 套方案`);
+      else if (retyped) toast(`已自动归类 ${retyped} 套方案`);
+      paintNotices();
+    } catch (err) {}
+    render();
+  </script>
+</body>
+</html>
